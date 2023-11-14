@@ -1,17 +1,22 @@
 import { useOutletContext } from "react-router-dom";
 import { ContextText } from "./Layout";
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useColorModeValue } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import GradientDiv from "./GradientDiv";
-import LoginForm from "./LoginForm";
-
 
 interface Props {
   headerText: string;
   node: () => JSX.Element;
 }
 
-
-const ModalTemplate = ({headerText, node}: Props) => {
+const ModalTemplate = ({ headerText, node }: Props) => {
   const { isOpen, handleClose } = useOutletContext<ContextText>();
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={handleClose}>
@@ -37,6 +42,6 @@ const ModalTemplate = ({headerText, node}: Props) => {
       </ModalContent>
     </Modal>
   );
-}
+};
 
-export default ModalTemplate
+export default ModalTemplate;

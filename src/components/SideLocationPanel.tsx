@@ -1,4 +1,4 @@
-import { Box, Button, Card, Heading, List, ListItem } from "@chakra-ui/react";
+import { Box, Button, Heading, List, ListItem } from "@chakra-ui/react";
 import { getLocations } from "../Services/getLocations";
 
 const SideLocationPanel = () => {
@@ -33,7 +33,7 @@ const SideLocationPanel = () => {
         </Heading>
         <List marginTop={4}>
           {locations.map((location) => (
-            <ListItem 
+            <ListItem
               _selected={{ fontSize: "2xl" }}
               key={location.id}
               _hover={{ bg: "purple.600" }}

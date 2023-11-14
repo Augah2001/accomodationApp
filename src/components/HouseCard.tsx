@@ -21,7 +21,6 @@ const HouseCard = ({ house, index }: Props) => {
           boxShadow={
             index % 2 === 0 ? "1px 0px 3px #805ad5" : "1px 0px 3px green"
           }
-          
         >
           <Image src={image} />
           <CardBody>

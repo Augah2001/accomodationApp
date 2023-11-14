@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 interface Props {
@@ -19,7 +19,11 @@ interface Props {
     renderInput: (id: string, label: string, type: string) => JSX.Element,
     renderPasswordInput: () => JSX.Element,
     renderButton: (label: string) => JSX.Element,
-    renderText: (route: string,text: string | null, linkText: string | null) => JSX.Element
+    renderText: (
+      route: string,
+      text: string | null,
+      linkText: string | null
+    ) => JSX.Element
   ) => JSX.Element;
 }
 
@@ -73,7 +77,11 @@ const FormTemplate = ({ children }: Props) => {
     );
   };
 
-  const renderText = (route: string, text: string | null, linkText: string | null) => {
+  const renderText = (
+    route: string,
+    text: string | null,
+    linkText: string | null
+  ) => {
     return (
       <Stack pt={6}>
         <Text align={"center"}>

@@ -1,5 +1,4 @@
-import { Box, HStack, Stack, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
+import { Box, Stack, useColorModeValue } from "@chakra-ui/react";
 import FormCard from "./FormTemplate";
 
 const LoginForm = () => {

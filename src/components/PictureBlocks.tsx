@@ -13,7 +13,6 @@ const PictureBlocks = ({ houses, id }: Props) => {
   );
 
   const handleImageClick = () => {
-    
     return (
       <>
         <Button>Wadii</Button>
@@ -22,12 +21,13 @@ const PictureBlocks = ({ houses, id }: Props) => {
         <Button>Wadii</Button>
       </>
     );
-  }
+  };
 
   return (
     <Box borderRadius="5px" width="100%" display="flex" flexDirection="row">
       <Box w={{ base: "100%", md: "67.4%" }} minH="60px">
-        <Image onClick={()=> handleImageClick()}
+        <Image
+          onClick={() => handleImageClick()}
           borderTopLeftRadius="5px"
           borderTopRightRadius={{ base: "5px", md: "0px" }}
           width="100%"

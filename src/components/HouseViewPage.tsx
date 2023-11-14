@@ -1,26 +1,22 @@
-import { Show, GridItem, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from "@chakra-ui/react";
-import React from "react";
+import {
+  Show,
+  GridItem,
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/react";
 import HomeViewCard from "./HomeViewCard";
-import { house } from "../Services/getHouses";
 import { useOutletContext, useParams } from "react-router-dom";
 import { ContextText } from "./Layout";
 
-interface Props {
-  isOpen: boolean;
-  handleClose: () => void
-}
- 
-
-
 const HouseViewPage = () => {
+  const { houses, isOpen, handleClose } = useOutletContext<ContextText>();
 
-  
-
-
-  const { houses, setHouses, isOpen, handleClose } = useOutletContext<ContextText>()
-
-  const {id} = useParams<{id: string | undefined}>();
-  
+  const { id } = useParams<{ id: string | undefined }>();
 
   return (
     <>
