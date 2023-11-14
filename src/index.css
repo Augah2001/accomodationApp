@@ -1,3 +1,23 @@
 body{
   padding-left: "10px";
 }
+
+input[type = "text"] :hover {
+  border-right-color: pink;
+  border-right-width: 2px;
+  border-left-width: 2px;
+  border-left-color: 2px;
+  border-radius: 2px;
+  border-top-style: 2px;
+  border-bottom-style: 2px;
+
+ 
+/* border-right-color: "pink.600",
+          borderRightWidth: "2px",
+          borderLeftWidth: "2px",
+          borderLeftColor: "pink.600",
+          borderRadius: "9px",
+          borderTopStyle: "none",
+          borderBottomStyle: "none",
+          caretColor: "green.600", */
+}

@@ -3,13 +3,13 @@ import React from "react";
 import HouseGrid from "./HouseGrid";
 import Navbar from "./Navbar";
 import SideLocationPanel from "./SideLocationPanel";
-import { useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 import { ContextText } from "./Layout";
 
 const HomePage = () => {
 
 
-  const [houses, setHouses] = useOutletContext<ContextText>()
+  const { houses, setHouses, isOpen, handleClose } = useOutletContext<ContextText>()
   return (
     <>
       <GridItem
@@ -18,7 +18,8 @@ const HomePage = () => {
         paddingY={5}
         marginY={4}
         area={"main"}
-      >
+      > 
+        <Outlet context={{isOpen, handleClose}} />
         <HouseGrid houses = {houses} />
       </GridItem>
       <Show above="md">

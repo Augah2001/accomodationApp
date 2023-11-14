@@ -4,6 +4,9 @@ import HomePage from "../components/HomePage";
 import HouseViewPage from "../components/HouseViewPage";
 import { getHouses } from "./getHouses";
 import getHouseStates from "../States/houseStates";
+import Auth from "../components/Auth";
+import ModalComponent from "../components/SignupModalComponent";
+
 
 const Routes = () => {
 
@@ -14,8 +17,9 @@ const Routes = () => {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "", element: <HomePage /> },
+      { path: "", element: <HomePage />, children: [{path: "auth", element: <ModalComponent/>}]},
       { path: ":id", element: <HouseViewPage /> },
+      {path: "auth"}
     ],
   },
 ])

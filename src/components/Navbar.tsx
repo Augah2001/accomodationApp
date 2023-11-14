@@ -3,7 +3,11 @@ import logo from "../assets/icons8-house-64.png";
 import MyComponent from "../SearchInput";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+interface Props {
+  handleOpen: () => void;
+}
+
+const Navbar = ({ handleOpen }: Props) => {
   return (
     <>
       <HStack
@@ -20,7 +24,18 @@ const Navbar = () => {
         </Link>
 
         <MyComponent />
-        <Show above="md"><Button bgGradient="linear(to-r, purple.700, #f926ae )"> Signup</Button></Show>
+        <Show above="md">
+          <Link to="/auth">
+            <Button
+              bgGradient="linear(to-r, purple.700, #f926ae )"
+              onClick={handleOpen}
+              _hover={{ backgroundColor: "#000021" }}
+            >
+              {" "}
+              JOIN
+            </Button>
+          </Link>
+        </Show>
       </HStack>
       <Box marginTop={4} display="flex" flexDirection="row">
         <Box

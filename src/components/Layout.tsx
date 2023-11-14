@@ -1,37 +1,40 @@
-import { Grid, GridItem, Show } from '@chakra-ui/react'
-import { useState } from 'react'
+import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { useState } from "react";
 
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
 
-import { Outlet, useLocation, useParams } from 'react-router-dom'
-import { house, getHouses } from '../Services/getHouses'
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { house, getHouses } from "../Services/getHouses";
 
-export type ContextText = [houses: house[] | null, setHouse: () => void];
+export type ContextText = {
+  houses: house[] | null;
+  setHouses: () => void;
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
 const Layout = () => {
+  const { id } = useParams();
 
-  const { id} = useParams()
+  const { pathname } = useLocation();
+  const paramRoute = `/${id}`;
 
-  const { pathname } = useLocation()
-  const paramRoute = `/${id}`
-
-
-  
-
-  
-  
-  const routeTemplateAreas : {[key: string]: any} = {
+  const routeTemplateAreas: { [key: string]: any } = {
     "/": {
       base: `"nav" "main"`,
       md: `"nav nav" "aside main"`,
       lg: `"nav nav" "aside main"`,
     },
-    
 
     [paramRoute]: `"nav nav nav" "leftSide main rightSide"`,
+    "/auth": {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    },
   };
 
-  const routesTemplateColumns: {[key: string]: any} = {
+  const routesTemplateColumns: { [key: string]: any } = {
     "/": {
       base: "1fr",
       md: "1fr",
@@ -42,17 +45,31 @@ const Layout = () => {
       md: "1fr",
       lg: "1fr 4fr 1fr",
     },
+    "/auth": {
+      base: "1fr",
+      md: "1fr",
+      lg: "300px 1fr",
+    },
   };
 
-  const currentTemplateAreas= routeTemplateAreas[pathname]
-  const currentTemplateColumns = routesTemplateColumns[pathname]
-
-  
-
+  const currentTemplateAreas = routeTemplateAreas[pathname];
+  const currentTemplateColumns = routesTemplateColumns[pathname];
 
   const [houses, setHouses] = useState<house[]>(getHouses());
 
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    setIsOpen(false);
+
+    navigate("/");
+  };
 
   return (
     <>
@@ -63,11 +80,12 @@ const Layout = () => {
       >
         <GridItem paddingY={3} marginTop={2} area="nav">
           {" "}
-          <Navbar />
+          <Navbar handleOpen={handleOpen} />
         </GridItem>
-        <Outlet context={[houses, setHouses]} />
+        <Outlet context={{ houses, setHouses, isOpen, handleClose }} />
       </Grid>
     </>
-  );}
+  );
+};
 
-export default Layout
+export default Layout;
