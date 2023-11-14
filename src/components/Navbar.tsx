@@ -25,7 +25,7 @@ const Navbar = ({ handleOpen }: Props) => {
 
         <MyComponent />
         <Show above="md">
-          <Link to="/auth">
+          <Link to="/signup">
             <Button
               bgGradient="linear(to-r, purple.700, #f926ae )"
               onClick={handleOpen}

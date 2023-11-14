@@ -2,33 +2,31 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import HomePage from "../components/HomePage";
 import HouseViewPage from "../components/HouseViewPage";
-import { getHouses } from "./getHouses";
-import getHouseStates from "../States/houseStates";
-import Auth from "../components/Auth";
-import ModalComponent from "../components/SignupModalComponent";
 
+import ModalComponent from "../components/refactored/SignupModalComponent";
+import LoginModalComponent from "../components/refactored/LoginModalComponent";
+import ModalTemplate from "../components/ModalTemplate";
+import SignupForm from "../components/SignupForm";
+import LoginForm from "../components/LoginForm";
 
 const Routes = () => {
+  return createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: <HomePage />,
+          children: [{
+            path: "signup", element: <ModalTemplate headerText={"JOIN"} node = {SignupForm} 
+  />
+          }, { path: "login", element: <ModalTemplate headerText = {"LOGIN"} node = {LoginForm} /> }],
+        },
+        { path: ":id", element: <HouseViewPage /> },
+      ],
+    },
+  ]);
+};
 
-
-  return (
-    createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { path: "", element: <HomePage />, children: [{path: "auth", element: <ModalComponent/>}]},
-      { path: ":id", element: <HouseViewPage /> },
-      {path: "auth"}
-    ],
-  },
-])
-    
-  )
-}
-
-
-
-
-
-export default Routes()
+export default Routes();

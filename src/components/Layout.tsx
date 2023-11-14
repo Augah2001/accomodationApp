@@ -27,7 +27,12 @@ const Layout = () => {
     },
 
     [paramRoute]: `"nav nav nav" "leftSide main rightSide"`,
-    "/auth": {
+    "/signup": {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    },
+    "/login": {
       base: `"nav" "main"`,
       md: `"nav nav" "aside main"`,
       lg: `"nav nav" "aside main"`,
@@ -45,7 +50,12 @@ const Layout = () => {
       md: "1fr",
       lg: "1fr 4fr 1fr",
     },
-    "/auth": {
+    "/signup": {
+      base: "1fr",
+      md: "1fr",
+      lg: "300px 1fr",
+    },
+    "/login": {
       base: "1fr",
       md: "1fr",
       lg: "300px 1fr",

@@ -14,16 +14,18 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
+  Link 
+  
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { Link as LinkRouter } from "react-router-dom";
 
 const SignupCard = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Box rounded={"lg"} bg="blue.900"  p={8}>
+    <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")}  p={8}>
       <Stack spacing={4}>
         <HStack>
           <Box>
@@ -72,7 +74,7 @@ const SignupCard = () => {
         </Stack>
         <Stack pt={6}>
           <Text align={"center"}>
-            Already a user? <Link color={"pink.400"}>Login</Link>
+            Already a user? <LinkRouter to = "/login" > <Link color= "pink.400">login</Link></LinkRouter>
           </Text>
         </Stack>
       </Stack>
