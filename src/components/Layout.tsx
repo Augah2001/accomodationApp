@@ -39,8 +39,6 @@ const Layout = () => {
     },
   };
 
-  const customRoute = `${[paramRoute]}/view`
-
   const routesTemplateColumns: { [key: string]: any } = {
     "/": {
       base: "1fr",
@@ -62,9 +60,6 @@ const Layout = () => {
       md: "1fr",
       lg: "300px 1fr",
     },
-
-    
-
   };
 
   const currentTemplateAreas = routeTemplateAreas[pathname];

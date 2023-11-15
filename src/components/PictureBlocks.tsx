@@ -1,4 +1,4 @@
-import { Box, Button, Image, Show } from "@chakra-ui/react";
+import { Box, Image, Show } from "@chakra-ui/react";
 
 import { house } from "../Services/getHouses";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const PictureBlocks = ({ houses, id }: Props) => {
   return (
     <Box borderRadius="5px" width="100%" display="flex" flexDirection="row">
       <Box w={{ base: "100%", md: "67.4%" }} minH="60px">
-        <Link to = {`/${id}/view`}>
+        <Link to={`/${id}/view`}>
           <Image
             // onClick={() => handleImageClick()}
             borderTopLeftRadius="5px"

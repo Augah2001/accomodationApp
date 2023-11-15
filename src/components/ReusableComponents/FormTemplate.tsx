@@ -1,19 +1,10 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
 import Joi from "joi";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { Link as LinkRouter } from "react-router-dom";
+import { Dispatch, SetStateAction, useState } from "react";
+
+import FormPasswordInput from "./FormPasswordInput";
+import FormTextInput from "./FormTextInput";
+import FormButton from "./FormButton";
+import FormText from "./FormText";
 
 interface Props {
   children: (
@@ -55,7 +46,6 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
       [id]: schema.extract(id),
     });
 
-    
     const { error } = newSchema.validate(property);
     if (!error) return;
     return error.message.replace(/["]/g, "");
@@ -74,83 +64,47 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
   const handleChange = ({
     currentTarget: input,
   }: React.ChangeEvent<HTMLInputElement>) => {
-
-    const newErrors = { ...errors }
-    const errorMessage = validateProperty(input) 
-    if (errorMessage) { newErrors[input.id] = errorMessage }
-    else delete newErrors[input.id];
-    setErrors(newErrors)
+    const newErrors = { ...errors };
+    const errorMessage = validateProperty(input);
+    if (errorMessage) {
+      newErrors[input.id] = errorMessage;
+    } else delete newErrors[input.id];
+    setErrors(newErrors);
 
     const newData = { ...data };
     newData[input.id] = input.value;
     setData(newData);
     validateProperty(input);
-
   };
 
   const renderInput = (id: string, label: string, type: string) => {
     return (
-      <Box>
-        <FormControl id={id}>
-          <FormLabel>{label}</FormLabel>
-          <Input
-            type={type}
-            value={data[id]}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </FormControl>
-        {errors[id] && (
-          <Box>
-            <Text color="red.300">{errors[id]}</Text>
-          </Box>
-        )}
-      </Box>
+      <FormTextInput
+        id={id}
+        type={type}
+        label={label}
+        onChange={handleChange}
+        value={data[id]}
+        errors={errors}
+      />
     );
   };
 
   const renderPasswordInput = (id: string) => {
     return (
-      <FormControl id= {id}>
-        <FormLabel>Password</FormLabel>
-        <InputGroup>
-          <Input
-            value={data[id]}
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => {
-             handleChange(e)
-            }}
-          />
-          <InputRightElement h={"full"}>
-            <Button
-              variant={"ghost"}
-              onClick={() => setShowPassword((showPassword) => !showPassword)}
-            >
-              {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </FormControl>
+      <FormPasswordInput
+        id={id}
+        value={data[id]}
+        showPassword={showPassword}
+        onChange={handleChange}
+        errors={errors}
+        setShowPassword={setShowPassword}
+      />
     );
   };
 
   const renderButton = (label: string) => {
-    return (
-      <Stack spacing={10} pt={2}>
-        <Button
-          type="submit"
-          size="lg"
-          bg={"pink.600"}
-          color={"white"}
-          _hover={{
-            bg: "pink.500",
-          }}
-        >
-          {label}
-        </Button>
-      </Stack>
-    );
+    return <FormButton label={label} />;
   };
 
   const renderText = (
@@ -158,17 +112,7 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
     text: string | null,
     linkText: string | null
   ) => {
-    return (
-      <Stack pt={6}>
-        <Text align={"center"}>
-          {text + " "}
-          <LinkRouter to={route}>
-            {" "}
-            <Link color="pink.400">{linkText}</Link>
-          </LinkRouter>
-        </Text>
-      </Stack>
-    );
+    return <FormText route={route} text={text} linkText={linkText} />;
   };
   return (
     <form

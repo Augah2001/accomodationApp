@@ -1,7 +1,7 @@
 import { Card, CardBody, Heading } from "@chakra-ui/react";
 import PictureBlocks from "./PictureBlocks";
 import { house } from "../Services/getHouses";
-import GradientDiv from "./GradientDiv";
+import GradientDiv from "./ReusableComponents/GradientDiv";
 
 interface Props {
   houses: house[] | null;

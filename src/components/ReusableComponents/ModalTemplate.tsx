@@ -1,21 +1,22 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import React from "react";
-import GradientDiv from "../GradientDiv";
-import SignupCard from "./SignupCard";
 import { useOutletContext } from "react-router-dom";
 import { ContextText } from "../Layout";
-import LoginCard from "./LoginCard";
-import LoginForm from "../LoginForm";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import GradientDiv from "./GradientDiv";
 
-const LoginModalComponent = () => {
+interface Props {
+  headerText: string;
+  node: () => JSX.Element;
+}
+
+const ModalTemplate = ({ headerText, node }: Props) => {
   const { isOpen, handleClose } = useOutletContext<ContextText>();
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={handleClose}>
@@ -28,7 +29,7 @@ const LoginModalComponent = () => {
           bg={useColorModeValue("white", "gray.700")}
           borderTopRadius={8}
         >
-          LOGIN
+          {headerText}
         </ModalHeader>
         <GradientDiv width="0%" />
         <ModalCloseButton size="lg" color="pink.500" />
@@ -36,11 +37,11 @@ const LoginModalComponent = () => {
           borderBottomRadius={8}
           bg={useColorModeValue("white", "gray.700")}
         >
-          <LoginForm />
+          {node()}
         </ModalBody>
       </ModalContent>
     </Modal>
   );
 };
 
-export default LoginModalComponent;
+export default ModalTemplate;
