@@ -11,13 +11,15 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import Joi from "joi";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 interface Props {
   children: (
     renderInput: (id: string, label: string, type: string) => JSX.Element,
-    renderPasswordInput: () => JSX.Element,
+
+    renderPasswordInput: (id: string) => JSX.Element,
     renderButton: (label: string) => JSX.Element,
     renderText: (
       route: string,
@@ -25,28 +27,101 @@ interface Props {
       linkText: string | null
     ) => JSX.Element
   ) => JSX.Element;
+  doSubmit: () => void;
+  schema: Joi.ObjectSchema<any> & { [key: string]: any };
+  data: { [key: string]: string };
+  setData: Dispatch<SetStateAction<{ [key: string]: string }>>;
 }
 
-const FormTemplate = ({ children }: Props) => {
+const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [showPassword, setShowPassword] = useState(false);
+
+  const validate = () => {
+    const { error } = schema.validate(data);
+    if (!error) return;
+    const newErrors: { [key: string]: string } = {};
+    error.details.map(
+      (item) => (newErrors[item.path[0]] = error.message.replace(/["]/g, ""))
+    );
+    return newErrors;
+  };
+
+  const validateProperty = ({ id, value }: EventTarget & HTMLInputElement) => {
+    const property = { [id]: value };
+    console.log(schema);
+
+    const newSchema = Joi.object({
+      [id]: schema.extract(id),
+    });
+
+    
+    const { error } = newSchema.validate(property);
+    if (!error) return;
+    return error.message.replace(/["]/g, "");
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const errors = validate();
+    if (errors) {
+      setErrors(errors || {});
+    } else {
+      doSubmit();
+    }
+  };
+
+  const handleChange = ({
+    currentTarget: input,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+
+    const newErrors = { ...errors }
+    const errorMessage = validateProperty(input) 
+    if (errorMessage) { newErrors[input.id] = errorMessage }
+    else delete newErrors[input.id];
+    setErrors(newErrors)
+
+    const newData = { ...data };
+    newData[input.id] = input.value;
+    setData(newData);
+    validateProperty(input);
+
+  };
 
   const renderInput = (id: string, label: string, type: string) => {
     return (
       <Box>
-        <FormControl id={id} isRequired>
+        <FormControl id={id}>
           <FormLabel>{label}</FormLabel>
-          <Input type={type} />
+          <Input
+            type={type}
+            value={data[id]}
+            onChange={(e) => {
+              handleChange(e);
+            }}
+          />
         </FormControl>
+        {errors[id] && (
+          <Box>
+            <Text color="red.300">{errors[id]}</Text>
+          </Box>
+        )}
       </Box>
     );
   };
 
-  const renderPasswordInput = () => {
+  const renderPasswordInput = (id: string) => {
     return (
-      <FormControl id="password" isRequired>
+      <FormControl id= {id}>
         <FormLabel>Password</FormLabel>
         <InputGroup>
-          <Input type={showPassword ? "text" : "password"} />
+          <Input
+            value={data[id]}
+            type={showPassword ? "text" : "password"}
+            onChange={(e) => {
+             handleChange(e)
+            }}
+          />
           <InputRightElement h={"full"}>
             <Button
               variant={"ghost"}
@@ -64,6 +139,7 @@ const FormTemplate = ({ children }: Props) => {
     return (
       <Stack spacing={10} pt={2}>
         <Button
+          type="submit"
           size="lg"
           bg={"pink.600"}
           color={"white"}
@@ -94,7 +170,15 @@ const FormTemplate = ({ children }: Props) => {
       </Stack>
     );
   };
-  return children(renderInput, renderPasswordInput, renderButton, renderText);
+  return (
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      {children(renderInput, renderPasswordInput, renderButton, renderText)}
+    </form>
+  );
 };
 
 export default FormTemplate;

@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import HomeViewCard from "./HomeViewCard";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import { ContextText } from "./Layout";
 
 const HouseViewPage = () => {
@@ -28,35 +28,8 @@ const HouseViewPage = () => {
       </Show>
 
       <GridItem paddingTop={5} paddingRight={5} paddingLeft={5} area="main">
+        <Outlet context={{ isOpen, handleClose }} />
         <HomeViewCard houses={houses} id={id} />
-        <Modal isOpen={isOpen} onClose={handleClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Signup Form</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {/* Add your signup form components here */}
-              <form>
-                <label>
-                  Name:
-                  <input type="text" />
-                </label>
-                <br />
-                <label>
-                  Email:
-                  <input type="email" />
-                </label>
-                <br />
-                <label>
-                  Password:
-                  <input type="password" />
-                </label>
-                <br />
-                <Button type="submit">Submit</Button>
-              </form>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
       </GridItem>
     </>
   );

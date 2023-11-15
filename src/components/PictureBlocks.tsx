@@ -1,6 +1,7 @@
 import { Box, Button, Image, Show } from "@chakra-ui/react";
 
 import { house } from "../Services/getHouses";
+import { Link } from "react-router-dom";
 
 interface Props {
   houses: house[] | null;
@@ -12,27 +13,24 @@ const PictureBlocks = ({ houses, id }: Props) => {
     id ? house.houseNumber === parseInt(id) : null
   );
 
-  const handleImageClick = () => {
-    return (
-      <>
-        <Button>Wadii</Button>
-        <Button>Wadii</Button>
-        <Button>Wadii</Button>
-        <Button>Wadii</Button>
-      </>
-    );
-  };
+  // const handleImageClick = () => {
+  //   return (
+
+  //   );
+  // };
 
   return (
     <Box borderRadius="5px" width="100%" display="flex" flexDirection="row">
       <Box w={{ base: "100%", md: "67.4%" }} minH="60px">
-        <Image
-          onClick={() => handleImageClick()}
-          borderTopLeftRadius="5px"
-          borderTopRightRadius={{ base: "5px", md: "0px" }}
-          width="100%"
-          src={house?.images[0]}
-        />
+        <Link to = {`/${id}/view`}>
+          <Image
+            // onClick={() => handleImageClick()}
+            borderTopLeftRadius="5px"
+            borderTopRightRadius={{ base: "5px", md: "0px" }}
+            width="100%"
+            src={house?.images[0]}
+          />
+        </Link>
       </Box>
       <Show above="md">
         <Box marginLeft="1px" width="33.6%" minH="60px">

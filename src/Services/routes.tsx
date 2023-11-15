@@ -23,7 +23,7 @@ const Routes = () => {
   />
           }, { path: "login", element: <ModalTemplate headerText = {"LOGIN"} node = {LoginForm} /> }],
         },
-        { path: ":id", element: <HouseViewPage /> },
+        { path: ":id", element: <HouseViewPage />, children: [{ path: "view", element: <ModalTemplate headerText="SLIDE" node={ SignupForm} />}] },
       ],
     },
   ]);
