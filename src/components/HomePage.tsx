@@ -3,9 +3,20 @@ import HouseGrid from "./HouseGrid";
 import SideLocationPanel from "./SideLocationPanel";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { ContextText } from "./Layout";
+import {useState} from 'react'
+
+
+
 
 const HomePage = () => {
+  const [selectedLocation, setSelectedLocation] = useState<string>()
   const { houses, isOpen, handleClose } = useOutletContext<ContextText>();
+  
+  const filteredHouses = selectedLocation? houses?.filter(house =>house.location === selectedLocation): houses
+
+  
+
+
   return (
     <>
       <GridItem
@@ -16,11 +27,11 @@ const HomePage = () => {
         area={"main"}
       >
         <Outlet context={{ isOpen, handleClose }} />
-        <HouseGrid houses={houses} />
+        <HouseGrid houses={filteredHouses} />
       </GridItem>
       <Show above="md">
         <GridItem padding={3} w={"40%"} marginY={4} area={"aside"}>
-          <SideLocationPanel />
+          <SideLocationPanel setSelectedLocation={setSelectedLocation } />
         </GridItem>
       </Show>
     </>
@@ -28,3 +39,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+

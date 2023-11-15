@@ -1,20 +1,27 @@
 import { Box, Button, HStack, Image, Show } from "@chakra-ui/react";
 import logo from "../assets/icons8-house-64.png";
-import MyComponent from "../SearchInput";
+import SerchInputGroup from "./ReusableComponents/SearchInputGroup";
 import { Link } from "react-router-dom";
+import { house } from "../Services/getHouses";
 
 interface Props {
   handleOpen: () => void;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  searchQuery: string;
+  houses: house[];
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Navbar = ({ handleOpen }: Props) => {
+const Navbar = ({
+  handleSearchChange,
+  houses,
+  handleOpen,
+  setSearchQuery,
+  searchQuery,
+}: Props) => {
   return (
     <>
-      <HStack
-
-      // bgGradient="linear-gradient(to right, #FF0000, #00FF00)"
-      //   borderBottomImage="linear-gradient(to right, #FF0000, #00FF00)"
-      >
+      <HStack>
         <Link to="/">
           <Show above="md">
             <Box boxSize="50px">
@@ -23,7 +30,12 @@ const Navbar = ({ handleOpen }: Props) => {
           </Show>
         </Link>
 
-        <MyComponent />
+        <SerchInputGroup
+          handleSearchChange={handleSearchChange}
+          houses={houses}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
         <Show above="md">
           <Link to="/signup">
             <Button

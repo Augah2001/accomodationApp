@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Badge, Box, Card, CardBody, Heading, Image } from "@chakra-ui/react";
 import { house } from "../Services/getHouses";
 import image from "../assets/no-image-placeholder.webp";
 import { Link } from "react-router-dom";
@@ -24,7 +24,15 @@ const HouseCard = ({ house, index }: Props) => {
         >
           <Image src={image} />
           <CardBody>
-            <Heading fontSize="">{house.description}</Heading>
+            <Heading
+              marginY={3}
+              fontSize=""
+            >{`Area: ${house.location}`}</Heading>
+            <Heading
+              marginY={3}
+              fontSize=""
+            >{`Distance: ${house.distance}`}</Heading>
+            <Heading marginY={3} fontSize="">Price: {<Badge paddingBottom={"3px" } colorScheme="green" fontSize= "16px" size="4xl">${house.price }</Badge>}</Heading>
           </CardBody>
 
           <Box key={house.houseNumber} display="flex" flexDirection="row">

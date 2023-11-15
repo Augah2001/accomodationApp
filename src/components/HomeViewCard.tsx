@@ -14,7 +14,7 @@ const HomeViewCard = ({ houses, id }: Props) => {
       <Card bg="#00021d">
         <PictureBlocks id={id} houses={houses} />
         <CardBody boxShadow="1px 1px 1px #805ad5" borderBottomRadius={5}>
-          <Heading> lorem Ipsum</Heading>
+          <Heading></Heading>
         </CardBody>
       </Card>
       <GradientDiv width="100%" />

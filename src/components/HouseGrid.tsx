@@ -4,7 +4,7 @@ import HouseCard from "./HouseCard";
 import { house } from "../Services/getHouses";
 
 interface Props {
-  houses: house[] | null;
+  houses: house[] | undefined
 }
 
 const HouseGrid = ({ houses }: Props) => {

@@ -1,8 +1,12 @@
-import { Box, Button, Heading, List, ListItem } from "@chakra-ui/react";
+import { Box, Button, Heading, List, ListItem, filter } from "@chakra-ui/react";
 import { getLocations } from "../Services/getLocations";
+interface Props {
+  setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
 
-const SideLocationPanel = () => {
+const SideLocationPanel = ({ setSelectedLocation }: Props) => {
   const locations = getLocations();
+
   return (
     <Box minW={"250px"}>
       <Box display="flex" flexDirection="row">
@@ -42,6 +46,7 @@ const SideLocationPanel = () => {
               paddingTop={2}
               height={"40px"}
               borderRadius={3}
+              onClick={() => setSelectedLocation(location.name)}
             >
               <Button variant={"link"}>{location.name}</Button>
             </ListItem>

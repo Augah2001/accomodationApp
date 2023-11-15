@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 interface Props {
   houses: house[] | null;
   id: string | undefined;
+  
 }
 
 const PictureBlocks = ({ houses, id }: Props) => {
