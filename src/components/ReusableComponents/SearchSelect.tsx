@@ -1,7 +1,13 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Select } from "@chakra-ui/react";
+import { priceOptions } from "../../Services/getPrices";
 
-const SearchSelect = () => {
+interface Props {
+  handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectedPriceRange: string;
+}
+
+const SearchSelect = ({handlePriceChange, selectedPriceRange}: Props) => {
   return (
     <Select
       placeholder="Price"
@@ -16,10 +22,16 @@ const SearchSelect = () => {
       borderRightWidth="0px"
       borderColor="purple.700"
       _focus={{ borderColor: "pink.600" }}
+      paddingLeft={3}
+      value={selectedPriceRange}
+
+      
+      onChange={(e) => {
+        handlePriceChange(e)
+      }}
     >
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-      <option value="option3">Option 3</option>
+      {priceOptions.map(option => <option key={option.value} value={option.value}>{ option.label}</option>)}
+
     </Select>
   );
 };

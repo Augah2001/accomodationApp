@@ -6,6 +6,8 @@ interface Props {
   searchQuery: string;
   houses: house[];
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectedPriceRange: string
 }
 
 
@@ -16,6 +18,7 @@ const SearchInput = ({handleSearchChange, searchQuery, houses, setSearchQuery }:
 
   return (
     <Input
+    
       variant="unstyled"
       type="text"
       h="40px"
@@ -33,7 +36,7 @@ const SearchInput = ({handleSearchChange, searchQuery, houses, setSearchQuery }:
       borderWidth="2px"
       borderRadius="5px"
       borderColor={"purple.700"}
-          maxWidth="600px"
+          
       paddingLeft={10}
       value={searchQuery}
       

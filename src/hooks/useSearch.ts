@@ -4,13 +4,17 @@ const useSearch = <T extends Record<string, string>>(
   initialData: T[],
   setData: React.Dispatch<React.SetStateAction<T[] | []>>
 ) => {
-  const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [queriedData, setQueriedData] = useState<T[]>([])
+
+    
+    
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
 
-    const newData = initialData.filter((item) => {
+    const data = initialData.filter((item) => {
       const regex = new RegExp(query, "i");
       for (let key in item) {
         if (regex.test(item[key])) {
@@ -20,11 +24,15 @@ const useSearch = <T extends Record<string, string>>(
 
       return false;
     });
+      data? setQueriedData(data): setQueriedData(initialData)
+      setQueriedData(data )
+      
 
-    setData(newData);
+      setData(data);
+      
   };
 
-  return { searchQuery, handleSearchChange, setSearchQuery, };
+  return { queriedData, searchQuery, handleSearchChange, setSearchQuery, };
 };
 
 export default useSearch;

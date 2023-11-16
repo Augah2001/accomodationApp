@@ -1,8 +1,8 @@
 import { Box, Button, HStack, Image, Show } from "@chakra-ui/react";
 import logo from "../assets/icons8-house-64.png";
-import SerchInputGroup from "./ReusableComponents/SearchInputGroup";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { house } from "../Services/getHouses";
+import SearchInputGroup from "./ReusableComponents/SearchInputGroup";
 
 interface Props {
   handleOpen: () => void;
@@ -10,6 +10,8 @@ interface Props {
   searchQuery: string;
   houses: house[];
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedPriceRange: string;
+  handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Navbar = ({
@@ -18,10 +20,21 @@ const Navbar = ({
   handleOpen,
   setSearchQuery,
   searchQuery,
+  handlePriceChange,
+  selectedPriceRange,
 }: Props) => {
+
+  const {pathname} = useLocation()
+  
   return (
     <>
-      <HStack>
+      <HStack
+        justifyContent={
+          !(pathname === "/" || pathname === "/signup" || pathname === "/login")
+            ? "space-between"
+            : "center"
+        }
+      >
         <Link to="/">
           <Show above="md">
             <Box boxSize="50px">
@@ -30,24 +43,34 @@ const Navbar = ({
           </Show>
         </Link>
 
-        <SerchInputGroup
-          handleSearchChange={handleSearchChange}
-          houses={houses}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-        />
-        <Show above="md">
-          <Link to="/signup">
-            <Button
-              bgGradient="linear(to-r, purple.700, #f926ae )"
-              onClick={handleOpen}
-              _hover={{ backgroundColor: "#000021" }}
-            >
-              {" "}
-              JOIN
-            </Button>
-          </Link>
-        </Show>
+        {(pathname === "/" ||
+          pathname === "/signup" ||
+          pathname === "/login") && (
+          <SearchInputGroup
+            handleSearchChange={handleSearchChange}
+            houses={houses}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            handlePriceChange={handlePriceChange}
+            selectedPriceRange={selectedPriceRange}
+          />
+        )}
+        {(pathname === "/" ||
+          pathname === "/signup" ||
+          pathname === "/login") && (
+          <Show above="md">
+            <Link to="/signup">
+              <Button
+                bgGradient="linear(to-r, purple.700, #f926ae )"
+                onClick={handleOpen}
+                _hover={{ backgroundColor: "#000021" }}
+              >
+                {" "}
+                JOIN
+              </Button>
+            </Link>
+          </Show>
+        )}
       </HStack>
       <Box marginTop={4} display="flex" flexDirection="row">
         <Box

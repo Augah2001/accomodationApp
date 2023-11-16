@@ -2,10 +2,11 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { house, getHouses } from "../Services/getHouses";
+import { house} from "../Services/getHouses";
 import useRouteTemplating from "../hooks/usetRouteTemplating";
 import useModal from "../hooks/useModal";
-import useSearchHouses from "../hooks/useSearchHouses";
+
+import useGetPageData from "../hooks/useGetPageData";
 
 export type ContextText = {
   houses: house[];
@@ -17,13 +18,17 @@ export type ContextText = {
 const Layout = () => {
   const { currentTemplateAreas, currentTemplateColumns } = useRouteTemplating();
   const { isOpen, handleOpen, handleClose } = useModal();
-  const [houses, setHouses] = useState<house[]>(getHouses());
-  const [AllHouses] = useState<house[]>(getHouses())
-
-  const { setSearchQuery, searchQuery, handleSearchChange } = useSearchHouses(setHouses)
- 
-
   
+  const {
+    setSearchQuery,
+    houses,
+    setHouses,
+    selectedPriceRange,
+    handlePriceChange,
+    handleSearchChange,
+    searchQuery,
+  } = useGetPageData()
+
   return (
     <>
       <Grid
@@ -39,6 +44,8 @@ const Layout = () => {
             houses={houses}
             searchQuery={searchQuery}
             handleSearchChange={handleSearchChange}
+            handlePriceChange={handlePriceChange}
+            selectedPriceRange={selectedPriceRange}
           />
         </GridItem>
         <Outlet context={{ houses, setHouses, isOpen, handleClose }} />
