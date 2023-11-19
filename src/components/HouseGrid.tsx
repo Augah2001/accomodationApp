@@ -12,7 +12,7 @@ const HouseGrid = ({ houses }: Props) => {
     <Box>
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {houses?.map((house, index) => (
-          <HouseCard index={index} house={house} />
+          <HouseCard index={index} house={house} key={house.houseNumber} />
         ))}
       </SimpleGrid>
     </Box>

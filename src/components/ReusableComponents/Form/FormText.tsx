@@ -7,7 +7,7 @@ interface Props {
   linkText: string | null;
 }
 
-const FormText = ({ route, text, linkText }: Props) => {
+export const FormText = ({ route, text, linkText }: Props) => {
   return (
     <Stack pt={6}>
       <Text align={"center"}>

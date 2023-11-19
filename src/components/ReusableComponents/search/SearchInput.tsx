@@ -1,5 +1,5 @@
-import { Input } from '@chakra-ui/react';
-import { house } from '../../Services/getHouses';
+import { Input } from "@chakra-ui/react";
+import { house } from "../../../Services/getHouses";
 
 interface Props {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -7,18 +7,17 @@ interface Props {
   houses: house[];
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  selectedPriceRange: string
+  selectedPriceRange: string;
 }
 
-
-const SearchInput = ({handleSearchChange, searchQuery, houses, setSearchQuery }: Props) => {
-  
-
-  
-
+const SearchInput = ({
+  handleSearchChange,
+  searchQuery,
+  houses,
+  setSearchQuery,
+}: Props) => {
   return (
     <Input
-    
       variant="unstyled"
       type="text"
       h="40px"
@@ -36,14 +35,11 @@ const SearchInput = ({handleSearchChange, searchQuery, houses, setSearchQuery }:
       borderWidth="2px"
       borderRadius="5px"
       borderColor={"purple.700"}
-          
       paddingLeft={10}
       value={searchQuery}
-      
-      
-      onChange={(e)=> handleSearchChange(e)}
+      onChange={(e) => handleSearchChange(e)}
     />
   );
-}
+};
 
-export default SearchInput
+export default SearchInput;

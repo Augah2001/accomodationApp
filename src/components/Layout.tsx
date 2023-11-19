@@ -2,7 +2,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { house} from "../Services/getHouses";
+import { house } from "../Services/getHouses";
 import useRouteTemplating from "../hooks/usetRouteTemplating";
 import useModal from "../hooks/useModal";
 
@@ -13,21 +13,29 @@ export type ContextText = {
   setHouses: () => void;
   isOpen: boolean;
   handleClose: () => void;
+  setPath: React.Dispatch<React.SetStateAction<String | "">>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
+  selectedLocation: string | "";
+  setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 const Layout = () => {
   const { currentTemplateAreas, currentTemplateColumns } = useRouteTemplating();
-  const { isOpen, handleOpen, handleClose } = useModal();
-  
+  const { isOpen, handleOpen, handleClose, path, setPath, setIsOpen } =
+    useModal();
+
   const {
     setSearchQuery,
-    houses,
+    filteredHouses: houses,
+    selectedLocation,
+    setSelectedLocation,
     setHouses,
     selectedPriceRange,
     handlePriceChange,
     handleSearchChange,
     searchQuery,
-  } = useGetPageData()
+  } = useGetPageData();
 
   return (
     <>
@@ -46,9 +54,23 @@ const Layout = () => {
             handleSearchChange={handleSearchChange}
             handlePriceChange={handlePriceChange}
             selectedPriceRange={selectedPriceRange}
+            setPath={setPath}
+            setIsOpen = {setIsOpen}
           />
         </GridItem>
-        <Outlet context={{ houses, setHouses, isOpen, handleClose }} />
+        <Outlet
+          context={{
+            setPath,
+            houses,
+            path,
+            setHouses,
+            isOpen,
+            handleClose,
+            setIsOpen,
+            selectedLocation,
+            setSelectedLocation,
+          }}
+        />
       </Grid>
     </>
   );

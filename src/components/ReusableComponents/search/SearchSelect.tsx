@@ -1,13 +1,13 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Select } from "@chakra-ui/react";
-import { priceOptions } from "../../Services/getPrices";
+import { priceOptions } from "../../../Services/getPrices";
 
 interface Props {
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   selectedPriceRange: string;
 }
 
-const SearchSelect = ({handlePriceChange, selectedPriceRange}: Props) => {
+const SearchSelect = ({ handlePriceChange, selectedPriceRange }: Props) => {
   return (
     <Select
       placeholder="Price"
@@ -24,14 +24,15 @@ const SearchSelect = ({handlePriceChange, selectedPriceRange}: Props) => {
       _focus={{ borderColor: "pink.600" }}
       paddingLeft={3}
       value={selectedPriceRange}
-
-      
       onChange={(e) => {
-        handlePriceChange(e)
+        handlePriceChange(e);
       }}
     >
-      {priceOptions.map(option => <option key={option.value} value={option.value}>{ option.label}</option>)}
-
+      {priceOptions.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
     </Select>
   );
 };

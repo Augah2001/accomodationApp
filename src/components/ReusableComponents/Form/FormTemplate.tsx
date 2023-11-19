@@ -3,25 +3,31 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 import FormPasswordInput from "./FormPasswordInput";
 import FormTextInput from "./FormTextInput";
-import FormButton from "./FormButton";
 import FormText from "./FormText";
+import { Button, HStack, Radio, RadioGroup, Text } from "@chakra-ui/react";
+import FormRadioButtons from "./FormRadioButtons";
 
 interface Props {
   children: (
     renderInput: (id: string, label: string, type: string) => JSX.Element,
-
     renderPasswordInput: (id: string) => JSX.Element,
     renderButton: (label: string) => JSX.Element,
     renderText: (
       route: string,
       text: string | null,
       linkText: string | null
+    ) => JSX.Element,
+    renderRadioButtons: (
+      id: string,
+      radioData: { label: string; value: any }[],
+      handleRadioChange: (id: string, value: string) => void
     ) => JSX.Element
   ) => JSX.Element;
   doSubmit: () => void;
   schema: Joi.ObjectSchema<any> & { [key: string]: any };
   data: { [key: string]: string };
   setData: Dispatch<SetStateAction<{ [key: string]: string }>>;
+  localContext: { [key: string | number]: any };
 }
 
 const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
@@ -40,7 +46,6 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
 
   const validateProperty = ({ id, value }: EventTarget & HTMLInputElement) => {
     const property = { [id]: value };
-    console.log(schema);
 
     const newSchema = Joi.object({
       [id]: schema.extract(id),
@@ -77,6 +82,24 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
     validateProperty(input);
   };
 
+  const renderRadioButtons = (
+    id: string,
+    radioData: { label: string; value: any }[],
+    handleRadioChange: (id: string, value: string) => void
+  ) => {
+    return (
+      <FormRadioButtons
+        onChange={handleChange}
+        data={data}
+        setData={setData}
+        id={id}
+        radioData={radioData}
+        errors={errors}
+        handleRadioChange={handleRadioChange}
+      />
+    );
+  };
+
   const renderInput = (id: string, label: string, type: string) => {
     return (
       <FormTextInput
@@ -104,7 +127,16 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
   };
 
   const renderButton = (label: string) => {
-    return <FormButton label={label} />;
+    return (
+      <Button
+        type="submit"
+        bg={"pink.600"}
+        _hover={{ bg: "pink.500" }}
+        _active={{ bg: "pink.400" }}
+      >
+        {label}
+      </Button>
+    );
   };
 
   const renderText = (
@@ -120,7 +152,13 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
         handleSubmit(e);
       }}
     >
-      {children(renderInput, renderPasswordInput, renderButton, renderText)}
+      {children(
+        renderInput,
+        renderPasswordInput,
+        renderButton,
+        renderText,
+        renderRadioButtons
+      )}
     </form>
   );
 };

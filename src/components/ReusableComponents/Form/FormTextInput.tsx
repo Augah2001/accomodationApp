@@ -3,7 +3,7 @@ import { Box, FormControl, FormLabel, Input, Text } from "@chakra-ui/react";
 interface Props {
   id: string;
   label: string;
-  value: string;
+  value: any;
   type: string;
   onChange: ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => void;
   errors: { [key: string]: string };

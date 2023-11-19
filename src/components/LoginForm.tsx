@@ -1,5 +1,5 @@
 import { Box, Stack, useColorModeValue } from "@chakra-ui/react";
-import FormCard from "./ReusableComponents/FormTemplate";
+import FormCard from "./ReusableComponents/Form/FormTemplate";
 import { useRef, useState } from "react";
 import Joi from "joi";
 

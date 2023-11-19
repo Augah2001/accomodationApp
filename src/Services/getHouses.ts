@@ -1,12 +1,13 @@
 import image from "../assets/no-image-placeholder.webp";
 
+
 export interface house {
   houseNumber: number;
   description: string;
   curfew: boolean;
   price: number;
   distance: string;
-  services: string[];
+  services: ["jacuzzi", "gas", "wifi"],
   backgroundImage: string;
   images: any[];
   location: string;
@@ -16,10 +17,11 @@ export interface house {
 const houses: house[] = [
   {
     houseNumber: 0,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 200,
     distance: "5km",
     images: [image, image, image, image],
@@ -27,10 +29,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 1,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 200,
     distance: "5km",
     images: [image, image, image, image],
@@ -38,10 +41,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 2,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: false,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 100,
     distance: "5km",
     images: [image, image, image, image],
@@ -49,10 +53,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 3,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 150,
     distance: "5km",
     images: [image, image, image, image],
@@ -60,10 +65,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 4,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 568,
     distance: "5km",
     images: [image, image, image, image],
@@ -71,10 +77,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 5,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: false,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 26,
     distance: "5km",
     images: [image, image, image, image],
@@ -82,10 +89,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 6,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 290,
     distance: "5km",
     images: [image, image, image, image],
@@ -93,10 +101,11 @@ const houses: house[] = [
   },
   {
     houseNumber: 7,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam",
+      
     curfew: false,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 150,
     distance: "5km",
     images: [image, image, image, image],
@@ -104,10 +113,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 8,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"],
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -115,10 +124,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 9,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -126,10 +135,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 10,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -137,10 +146,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 11,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -148,10 +157,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 12,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -159,10 +168,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 13,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -170,10 +179,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 14,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -181,10 +190,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 15,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -192,10 +201,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 16,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -203,10 +212,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 17,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -214,10 +223,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 18,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -225,10 +234,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 19,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -236,10 +245,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 20,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -247,10 +256,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 21,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -258,10 +267,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 22,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -269,10 +278,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 23,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -280,10 +289,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 24,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -291,10 +300,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 25,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -302,10 +311,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 26,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -313,10 +322,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 27,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -324,10 +333,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 28,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -335,10 +344,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 29,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],
@@ -346,10 +355,10 @@ const houses: house[] = [
   },
   {
     houseNumber: 30,
-    description: "lorem ipsum",
+    description:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adaliquid amet at delectus doloribus dolorum expedita hic, ipsummaxime modi nam officiis porro, quae, quisquam quosreprehenderit velit? Natus, totam", 
     curfew: true,
     backgroundImage: "",
-    services: ["lorem ipsum"],
+    services: ["jacuzzi", "gas", "wifi"], 
     price: 305,
     distance: "5km",
     images: [image, image, image, image],

@@ -5,6 +5,8 @@ const useRouteTemplating = () => {
 
   const { pathname } = useLocation();
   const paramRoute = `/${id}`;
+  const paramRouteView = `${paramRoute}/view`
+  const paramRoutePay = `${paramRoute}/pay`
 
   const routeTemplateAreas: { [key: string]: any } = {
     "/": {
@@ -24,6 +26,8 @@ const useRouteTemplating = () => {
       md: `"nav nav" "aside main"`,
       lg: `"nav nav" "aside main"`,
     },
+    [paramRouteView]: `"nav nav nav" "leftSide main rightSide"`,
+    [paramRoutePay]: `"nav nav nav" "leftSide main rightSide"`,
   };
 
   const routesTemplateColumns: { [key: string]: any } = {
@@ -46,6 +50,16 @@ const useRouteTemplating = () => {
       base: "1fr",
       md: "1fr",
       lg: "300px 1fr",
+    },
+    [paramRouteView]: {
+      base: "1fr",
+      md: "1fr",
+      lg: "1fr 4fr 1fr",
+    },
+    [paramRoutePay]: {
+      base: "1fr",
+      md: "1fr",
+      lg: "1fr 4fr 1fr",
     },
   };
 

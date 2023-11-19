@@ -2,12 +2,13 @@
 export interface LocationType{
     name: string;
     id:number,
-    distance: string,
+    distance: string | null,
    
     
 }
 
 const locations: LocationType[] = [
+    {name: "Any", id: 0 , distance: null},
     {name: "Maboureign", id: 1, distance: "2km"},
     {name: "Mount Pleasant", id: 2, distance: "500m"},
     {name: "Borrowdale", id: 3, distance: "3km"},

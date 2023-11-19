@@ -1,8 +1,8 @@
-import { Button, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import SearchSelect from "./SearchSelect";
 import SearchInput from "./SearchInput";
-import { house } from "../../Services/getHouses";
+import { house } from "../../../Services/getHouses";
 
 interface Props {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;

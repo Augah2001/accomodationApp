@@ -1,25 +1,30 @@
 import { Box, HStack, Stack, useColorModeValue } from "@chakra-ui/react";
-import FormCard from "./ReusableComponents/FormTemplate";
+import FormCard from "./ReusableComponents/Form/FormTemplate";
 import { useState } from "react";
 import Joi from "joi";
 
-export type DataType = { firstName: string; lastName: string; email: string };
-
-export type setDataType = React.Dispatch<
-  React.SetStateAction<{
-    firstName: string;
-    lastName: string;
-    email: string;
-  }>
->;
-
 const SignupForm = () => {
+  const [localContext, setlocalContext] = useState<{ [key: string]: any }>({
+    landlordDiv: false,
+  });
+
   const [user, setUser] = useState<{ [key: string]: string }>({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    userType: "",
+    authKey: "",
   });
+
+  const handleRadioChange = (id: string, value: string) => {
+    setUser({ ...user, [id]: value });
+    if (value === "landlord") {
+      setlocalContext({ ...localContext, landlordDiv: true });
+    } else {
+      setlocalContext({ ...localContext, landlordDiv: false });
+    }
+  };
 
   const schema: Joi.ObjectSchema<any> & { [key: string]: any } = Joi.object({
     firstName: Joi.string().required().label("First Name"),
@@ -33,14 +38,29 @@ const SignupForm = () => {
       })
       .required(),
     password: Joi.string().required(),
+    userType: Joi.string().required().label("user type"),
+    authKey: Joi.string(),
   });
 
   const doSubmit = () => {
     console.log("submitted");
   };
+
   return (
-    <FormCard doSubmit={doSubmit} schema={schema} data={user} setData={setUser}>
-      {(renderInput, renderPasswordInput, renderButton, renderText) => {
+    <FormCard
+      doSubmit={doSubmit}
+      schema={schema}
+      data={user}
+      setData={setUser}
+      localContext={localContext}
+    >
+      {(
+        renderInput,
+        renderPasswordInput,
+        renderButton,
+        renderText,
+        renderRadioButtons
+      ) => {
         return (
           <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} p={8}>
             <Stack spacing={4}>
@@ -50,6 +70,18 @@ const SignupForm = () => {
               </HStack>
               {renderInput("email", "Email", "text")}
               {renderPasswordInput("password")}
+              {renderRadioButtons(
+                "userType",
+                [
+                  { label: "tenant", value: "tenant" },
+                  { label: "landlord", value: "landlord" },
+                ],
+                handleRadioChange
+              )}
+              <Box color={"green.400"}>
+                {localContext.landlordDiv &&
+                  renderInput("authKey", "Authorization key", "text")}
+              </Box>
               {renderButton("Sign Up")}
               {renderText("/login", "Already have an account?", "login")}
             </Stack>

@@ -13,7 +13,7 @@ import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   id: string;
-  value: string;
+  value: any;
   showPassword: boolean;
   onChange: ({ currentTarget }: React.ChangeEvent<HTMLInputElement>) => void;
   setShowPassword: Dispatch<SetStateAction<boolean>>;

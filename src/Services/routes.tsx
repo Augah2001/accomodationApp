@@ -3,9 +3,14 @@ import Layout from "../components/Layout";
 import HomePage from "../components/HomePage";
 import HouseViewPage from "../components/HouseViewPage";
 
-import ModalTemplate from "../components/ReusableComponents/ModalTemplate";
+import ModalTemplate from "../components/ReusableComponents/miscellaneous/ModalTemplate";
 import SignupForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
+import Navbar from "../components/Navbar";
+import useExample from "../components/useExample";
+import SlideShow from "../components/SlideShow";
+import ImageModal from "../components/ImageModal";
+import Pay from "../components/pay";
 
 const Routes = () => {
   return createBrowserRouter([
@@ -19,21 +24,25 @@ const Routes = () => {
           children: [
             {
               path: "signup",
-              element: <ModalTemplate headerText={"JOIN"} node={SignupForm} />,
+              element: <ModalTemplate headerText={"JOIN"} Node={SignupForm} />,
             },
             {
               path: "login",
-              element: <ModalTemplate headerText={"LOGIN"} node={LoginForm} />,
+              element: <ModalTemplate headerText={"LOGIN"} Node={LoginForm} />,
             },
           ],
         },
         {
-          path: ":id",
+          path: ":id/",
           element: <HouseViewPage />,
           children: [
             {
-              path: "view",
-              element: <ModalTemplate headerText="SLIDE" node={SignupForm} />,
+              path: "view/",
+              element: <ImageModal />,
+            },
+            {
+              path: "pay",
+              element: <ModalTemplate headerText="Pay" Node={Pay} />,
             },
           ],
         },

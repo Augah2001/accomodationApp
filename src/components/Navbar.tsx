@@ -2,7 +2,11 @@ import { Box, Button, HStack, Image, Show } from "@chakra-ui/react";
 import logo from "../assets/icons8-house-64.png";
 import { Link, useLocation } from "react-router-dom";
 import { house } from "../Services/getHouses";
-import SearchInputGroup from "./ReusableComponents/SearchInputGroup";
+import SearchInputGroup from "./ReusableComponents/search/SearchInputGroup";
+import { useEffect } from "react";
+import ButtonRegular from "./ReusableComponents/miscellaneous/Button";
+import ModalTemplate from "./ReusableComponents/miscellaneous/ModalTemplate";
+import SignupForm from "./SignupForm";
 
 interface Props {
   handleOpen: () => void;
@@ -12,6 +16,8 @@ interface Props {
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   selectedPriceRange: string;
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setPath: React.Dispatch<React.SetStateAction<string>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Navbar = ({
@@ -22,13 +28,25 @@ const Navbar = ({
   searchQuery,
   handlePriceChange,
   selectedPriceRange,
+  setPath,
+  setIsOpen,
 }: Props) => {
+  const { pathname } = useLocation();
 
-  const {pathname} = useLocation()
-  
+  useEffect(() => {
+    setPath(pathname);
+  }, []);
+
+  const handleClick = () => {
+    setPath(pathname);
+    setIsOpen(true);
+
+    return <ModalTemplate headerText={"bajha"} Node={SignupForm} />;
+  };
   return (
     <>
       <HStack
+        minH={"65px"}
         justifyContent={
           !(pathname === "/" || pathname === "/signup" || pathname === "/login")
             ? "space-between"
@@ -60,14 +78,7 @@ const Navbar = ({
           pathname === "/login") && (
           <Show above="md">
             <Link to="/signup">
-              <Button
-                bgGradient="linear(to-r, purple.700, #f926ae )"
-                onClick={handleOpen}
-                _hover={{ backgroundColor: "#000021" }}
-              >
-                {" "}
-                JOIN
-              </Button>
+              <ButtonRegular handleClick={handleClick} label="JOIN" />
             </Link>
           </Show>
         )}

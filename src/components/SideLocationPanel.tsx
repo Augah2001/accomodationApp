@@ -1,7 +1,7 @@
 import { Box, Button, Heading, List, ListItem, filter } from "@chakra-ui/react";
 import { getLocations } from "../Services/getLocations";
 interface Props {
-  setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedLocation: React.Dispatch<React.SetStateAction<string | "">>;
 }
 
 const SideLocationPanel = ({ setSelectedLocation }: Props) => {

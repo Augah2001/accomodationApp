@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useModal = () => {
+  const [path, setPath] = useState<string | "">("");
 
-
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -15,10 +15,10 @@ const useModal = () => {
   const handleClose = () => {
     setIsOpen(false);
 
-    navigate("/");
+    navigate(path, {replace: true});
   };
 
-  return {isOpen,handleOpen,setIsOpen, handleClose}
-}
+  return { path, isOpen, handleOpen, setIsOpen, handleClose, setPath };
+};
 
-export default useModal
+export default useModal;

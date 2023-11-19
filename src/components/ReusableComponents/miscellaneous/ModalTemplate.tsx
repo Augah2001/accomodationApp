@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { ContextText } from "../Layout";
+import { ContextText } from "../../Layout";
 import {
   Modal,
   ModalBody,
@@ -13,10 +13,10 @@ import GradientDiv from "./GradientDiv";
 
 interface Props {
   headerText: string;
-  node: () => JSX.Element;
+  Node: () => JSX.Element;
 }
 
-const ModalTemplate = ({ headerText, node }: Props) => {
+const ModalTemplate = ({ headerText, Node }: Props) => {
   const { isOpen, handleClose } = useOutletContext<ContextText>();
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={handleClose}>
@@ -37,7 +37,7 @@ const ModalTemplate = ({ headerText, node }: Props) => {
           borderBottomRadius={8}
           bg={useColorModeValue("white", "gray.700")}
         >
-          {node()}
+          <Node />
         </ModalBody>
       </ModalContent>
     </Modal>

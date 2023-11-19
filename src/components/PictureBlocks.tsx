@@ -1,31 +1,44 @@
 import { Box, Image, Show } from "@chakra-ui/react";
 
 import { house } from "../Services/getHouses";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import useModal from "../hooks/useModal";
+import { useEffect } from "react";
 
 interface Props {
   houses: house[] | null;
   id: string | undefined;
-  
+  isOpen: boolean;
+  setPath: React.Dispatch<React.SetStateAction<String | "">>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PictureBlocks = ({ houses, id }: Props) => {
+
+const PictureBlocks = ({ setIsOpen, houses, id, isOpen, setPath }: Props) => {
   const house = houses?.find((house) =>
     id ? house.houseNumber === parseInt(id) : null
   );
 
-  // const handleImageClick = () => {
-  //   return (
+  
 
-  //   );
-  // };
+
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setPath(pathname);
+  }, []);
 
   return (
     <Box borderRadius="5px" width="100%" display="flex" flexDirection="row">
       <Box w={{ base: "100%", md: "67.4%" }} minH="60px">
         <Link to={`/${id}/view`}>
           <Image
-            // onClick={() => handleImageClick()}
+            className="IMG"
+            onClick={() => {
+              setIsOpen(true)
+              // <ModalTemplate headerText="view" Node={LoginForm}/>
+            }}
             borderTopLeftRadius="5px"
             borderTopRightRadius={{ base: "5px", md: "0px" }}
             width="100%"
