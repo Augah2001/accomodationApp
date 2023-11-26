@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";

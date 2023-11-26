@@ -22,7 +22,7 @@ function SearchInputGroup({
   searchQuery,
 }: Props) {
   return (
-    <InputGroup marginX={10} justifyContent="center">
+    <InputGroup >
       <InputLeftElement
         children={<SearchIcon color="pink.600" />}
         className="search-icon"

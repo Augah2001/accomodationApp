@@ -1,21 +1,28 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, useColorModeValue, ModalCloseButton, ModalBody, Button } from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  useColorModeValue,
+  ModalCloseButton,
+  ModalBody,
+  Button,
+} from "@chakra-ui/react";
 
-import { useOutletContext } from 'react-router-dom';
-import { ContextText } from './Layout';
-import SlideShow from './SlideShow';
-import { house } from '../Services/getHouses';
+import { useOutletContext } from "react-router-dom";
+
+import SlideShow from "./SlideShow";
+import { ContextText } from "../hooks/useGetPageData";
 
 const ImageModal = () => {
-
   const { id, isOpen, handleClose, houses } = useOutletContext<ContextText>();
   const house = houses?.find((house) =>
     id ? house.houseNumber === parseInt(id) : null
   );
-  console.log('clicked')
-  
+  console.log("clicked");
 
   return (
-    <Modal  closeOnOverlayClick={true} isOpen={isOpen} onClose={handleClose}>
+    <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={()=>handleClose}>
       <ModalOverlay />
       <ModalContent width={"100%"}>
         <ModalBody
@@ -28,6 +35,6 @@ const ImageModal = () => {
       </ModalContent>
     </Modal>
   );
-}
+};
 
-export default ImageModal
+export default ImageModal;

@@ -1,16 +1,44 @@
-import { Box, Stack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Stack, useColorModeValue, useToast } from "@chakra-ui/react";
 import FormCard from "./ReusableComponents/Form/FormTemplate";
 import { useRef, useState } from "react";
 import Joi from "joi";
+import axios from "axios";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
+import { ContextText } from "./Layout";
 
 const LoginForm = () => {
+
+
+  const toast = useToast({
+    position: "top",
+    title: "signup successful",
+    containerStyle: {
+      width: "800px",
+      maxWidth: "500px",
+      color: "pink.600",
+      backgroundColor: "pink.600",
+    },
+  });
+  const { setIsOpen, setIsLogged, setUser, user } =
+    useOutletContext<ContextText>();
   const [loginData, setLoginData] = useState<{ [key: string]: string }>({
     email: "",
     password: "",
   });
 
+  const navigate = useNavigate()
+  const {pathname}  = useLocation()
+
   const doSubmit = () => {
-    console.log("submitted");
+    axios.post("http://localhost:443/api/logins", loginData).then((res) => {
+      toast();
+      setUser(res.data);
+      setIsOpen(false);
+      navigate('/me')
+      setIsLogged(true); 
+      console.log(res.data)
+      // Explicitly set isLogged to true // Redirect to home page
+    });
   };
 
   const schema: Joi.ObjectSchema<any> & { [key: string]: any } = Joi.object({

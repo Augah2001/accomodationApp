@@ -1,22 +1,7 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  HStack,
-  Heading,
-  List,
-  ListItem,
-  SimpleGrid,
-  Stack,
-  StackDivider,
-  Text,
-  VStack,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Card } from "@chakra-ui/react";
 import PictureBlocks from "./PictureBlocks";
 import { house } from "../Services/getHouses";
 import GradientDiv from "./ReusableComponents/miscellaneous/GradientDiv";
-import ButtonRegular from "./ReusableComponents/miscellaneous/Button";
 import HomeViewBody from "./HomeViewBody";
 
 interface Props {
@@ -52,11 +37,6 @@ const HomeViewCard = ({ setIsOpen, houses, id, isOpen, setPath }: Props) => {
       }
     }
   }
-
-  const ones = [];
-
-  // const newThing = Object.keys(moreDetails).map(key => )
-  // console.log(newThing)
 
   return (
     <>

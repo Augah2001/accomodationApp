@@ -6,8 +6,9 @@ interface Props {
 
 const FormButton = ({ label }: Props) => {
   return (
-    <Stack spacing={10} pt={2}>
+    <Stack  spacing={10} pt={2}>
       <Button
+      marginY = "30px"
         type="submit"
         size="lg"
         bg={"pink.600"}

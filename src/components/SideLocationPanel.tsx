@@ -1,11 +1,34 @@
 import { Box, Button, Heading, List, ListItem, filter } from "@chakra-ui/react";
 import { getLocations } from "../Services/getLocations";
+import { useEffect, useState } from "react";
+import axios from "axios";
 interface Props {
-  setSelectedLocation: React.Dispatch<React.SetStateAction<string | "">>;
+  setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
+export interface LocationType{
+  name: string;
+  id:number,
+  distance: string | null,
+ 
+  
+}
+
+
+
 const SideLocationPanel = ({ setSelectedLocation }: Props) => {
-  const locations = getLocations();
+  const [locations, setLocations] = useState<LocationType[]>([])
+
+
+  useEffect(()=> {
+
+    axios.get<LocationType[]>('http://127.0.0.1:443/api/locations/')
+    .then((res)=> {
+      console.log(res.data)
+      setLocations([{name: "Any", id: 0, distance: null},...res.data ])})
+    .catch((error)=> console.log(error))
+  
+  }, [])
 
   return (
     <Box minW={"250px"}>

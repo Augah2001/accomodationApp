@@ -25,9 +25,9 @@ interface Props {
   ) => JSX.Element;
   doSubmit: () => void;
   schema: Joi.ObjectSchema<any> & { [key: string]: any };
-  data: { [key: string]: string };
-  setData: Dispatch<SetStateAction<{ [key: string]: string }>>;
-  localContext: { [key: string | number]: any };
+  data: { [key: string]: any };
+  setData: Dispatch<SetStateAction<{ [key: string]: any }>>;
+
 }
 
 const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
@@ -59,8 +59,11 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validate();
+    
     if (errors) {
       setErrors(errors || {});
+      console.log(errors)
+      
     } else {
       doSubmit();
     }
@@ -85,8 +88,10 @@ const FormTemplate = ({ children, doSubmit, data, setData, schema }: Props) => {
   const renderRadioButtons = (
     id: string,
     radioData: { label: string; value: any }[],
-    handleRadioChange: (id: string, value: string) => void
+    handleRadioChange?: (id: string, value: string) => void
   ) => {
+
+    
     return (
       <FormRadioButtons
         onChange={handleChange}

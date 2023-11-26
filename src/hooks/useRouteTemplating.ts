@@ -5,11 +5,16 @@ const useRouteTemplating = () => {
 
   const { pathname } = useLocation();
   const paramRoute = `/${id}`;
-  const paramRouteView = `${paramRoute}/view`
-  const paramRoutePay = `${paramRoute}/pay`
+  const paramRouteView = `${paramRoute}/view`;
+  const paramRoutePay = `${paramRoute}/pay`;
 
   const routeTemplateAreas: { [key: string]: any } = {
     "/": {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    },
+    "/me": {
       base: `"nav" "main"`,
       md: `"nav nav" "aside main"`,
       lg: `"nav nav" "aside main"`,
@@ -28,10 +33,26 @@ const useRouteTemplating = () => {
     },
     [paramRouteView]: `"nav nav nav" "leftSide main rightSide"`,
     [paramRoutePay]: `"nav nav nav" "leftSide main rightSide"`,
+    "/me/my-assets":  {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    },
+    "/me/my-assets/add": 
+    {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    }
   };
 
   const routesTemplateColumns: { [key: string]: any } = {
     "/": {
+      base: "1fr",
+      md: "1fr",
+      lg: "300px 1fr",
+    },
+    "/me": {
       base: "1fr",
       md: "1fr",
       lg: "300px 1fr",
@@ -61,6 +82,18 @@ const useRouteTemplating = () => {
       md: "1fr",
       lg: "1fr 4fr 1fr",
     },
+
+    "/me/my-assets":  {
+      base: "1fr",
+      md: "1fr",
+      lg: "200x 1fr",
+    },
+    "/me/my-assets/add": {
+      base: "1fr",
+      md: "1fr",
+      lg: "0px 1fr",
+    },
+    
   };
 
   const currentTemplateAreas = routeTemplateAreas[pathname];

@@ -2,25 +2,28 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
-import { house } from "../Services/getHouses";
-import useRouteTemplating from "../hooks/usetRouteTemplating";
+
+import useRouteTemplating from "../hooks/useRouteTemplating";
 import useModal from "../hooks/useModal";
+
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  userType: string;
+  _id: string;
+}
 
 import useGetPageData from "../hooks/useGetPageData";
 
-export type ContextText = {
-  houses: house[];
-  setHouses: () => void;
-  isOpen: boolean;
-  handleClose: () => void;
-  setPath: React.Dispatch<React.SetStateAction<String | "">>;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  id: string;
-  selectedLocation: string | "";
-  setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
-};
+
 
 const Layout = () => {
+  const [user, setUser] = useState<User>();
+
+  const [isLogged, setIsLogged] = useState(false);
+
   const { currentTemplateAreas, currentTemplateColumns } = useRouteTemplating();
   const { isOpen, handleOpen, handleClose, path, setPath, setIsOpen } =
     useModal();
@@ -47,6 +50,8 @@ const Layout = () => {
         <GridItem paddingY={3} marginTop={2} area="nav">
           {" "}
           <Navbar
+            isLogged={isLogged}
+            setIsLogged={setIsLogged}
             handleOpen={handleOpen}
             setSearchQuery={setSearchQuery}
             houses={houses}
@@ -55,11 +60,15 @@ const Layout = () => {
             handlePriceChange={handlePriceChange}
             selectedPriceRange={selectedPriceRange}
             setPath={setPath}
-            setIsOpen = {setIsOpen}
+            setIsOpen={setIsOpen}
+            user={user}
+            setUser={setUser}
           />
         </GridItem>
         <Outlet
           context={{
+            isLogged: isLogged,
+            setIsLogged: setIsLogged,
             setPath,
             houses,
             path,
@@ -69,6 +78,8 @@ const Layout = () => {
             setIsOpen,
             selectedLocation,
             setSelectedLocation,
+            setUser,
+            user,
           }}
         />
       </Grid>

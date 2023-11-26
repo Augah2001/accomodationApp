@@ -3,10 +3,12 @@ import logo from "../assets/icons8-house-64.png";
 import { Link, useLocation } from "react-router-dom";
 import { house } from "../Services/getHouses";
 import SearchInputGroup from "./ReusableComponents/search/SearchInputGroup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ButtonRegular from "./ReusableComponents/miscellaneous/Button";
-import ModalTemplate from "./ReusableComponents/miscellaneous/ModalTemplate";
-import SignupForm from "./SignupForm";
+import ThreeDotsMenu from "./ReusableComponents/miscellaneous/threeDotsMenu";
+import UserImage from "./ReusableComponents/miscellaneous/UserImage";
+import { User } from "./Layout";
+import axios from "axios";
 
 interface Props {
   handleOpen: () => void;
@@ -18,31 +20,65 @@ interface Props {
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   setPath: React.Dispatch<React.SetStateAction<string>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
+  isLogged: boolean,
+  user: User
+  setUser: React.Dispatch<React.SetStateAction<User >>
 }
 
 const Navbar = ({
   handleSearchChange,
   houses,
-  handleOpen,
+ 
   setSearchQuery,
   searchQuery,
   handlePriceChange,
   selectedPriceRange,
   setPath,
   setIsOpen,
+  isLogged,
+  user,
+  setUser
 }: Props) => {
+
+  const [heading, setHeading] = useState<string>("")
+
+  
   const { pathname } = useLocation();
+
+  useEffect(()=> {
+    user && axios.get<User>(`http://localhost:443/api/users/${user._id}`)
+  .then(res => setHeading(res.data.firstName))
+  }, [user])
 
   useEffect(() => {
     setPath(pathname);
   }, []);
 
+  const threeDotsMenuItems = [
+    { label: "home", value: "/" },
+    {label: "join", value: "/signup"},
+    { label: "contact", value: "/contact" },
+    { label: "about", value: "/about" }
+    
+  ];
+
+  const imageMenuItems = [
+    {label: "My assets", value: "me/my-assets"},
+    {label: "signout", value: "/signout"},
+    {label: "gifts", value: "#"}
+  ]
+  
+
   const handleClick = () => {
     setPath(pathname);
     setIsOpen(true);
-
-    return <ModalTemplate headerText={"bajha"} Node={SignupForm} />;
   };
+
+  console.log(isLogged)
+
+ 
+
   return (
     <>
       <HStack
@@ -53,7 +89,11 @@ const Navbar = ({
             : "center"
         }
       >
-        <Link to="/">
+        <Show below="sm">
+          <ThreeDotsMenu menuItems={threeDotsMenuItems} />
+        </Show>
+
+        <Link to={isLogged? "/me": "/"}>
           <Show above="md">
             <Box boxSize="50px">
               <Image src={logo} />
@@ -63,7 +103,8 @@ const Navbar = ({
 
         {(pathname === "/" ||
           pathname === "/signup" ||
-          pathname === "/login") && (
+          pathname === "/login" ||
+          pathname === "/me") && (
           <SearchInputGroup
             handleSearchChange={handleSearchChange}
             houses={houses}
@@ -73,19 +114,26 @@ const Navbar = ({
             selectedPriceRange={selectedPriceRange}
           />
         )}
-        {(pathname === "/" ||
-          pathname === "/signup" ||
-          pathname === "/login") && (
-          <Show above="md">
-            <Link to="/signup">
-              <ButtonRegular handleClick={handleClick} label="JOIN" />
-            </Link>
-          </Show>
+        { (!isLogged) && (
+          
+            <Show above="md">
+              <Link to="/signup">
+                <ButtonRegular handleClick={handleClick} label="JOIN" />
+              </Link>
+            </Show>
+            
+          
         )}
+        {isLogged && <Box
+              boxSize="48px"
+              borderRadius="50%"
+              paddingTop={{ base: "8px", md: "6px", lg: "4px" }}
+            >
+             <UserImage heading= {heading}  menuItems={imageMenuItems} />
+            </Box>}
       </HStack>
       <Box marginTop={4} display="flex" flexDirection="row">
         <Box
-          //   display="inline-block"
           w="50%"
           h="2px"
           bgGradient="linear-gradient(to right, transparent, pink.500)"

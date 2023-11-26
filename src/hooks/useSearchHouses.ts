@@ -1,9 +1,10 @@
 import React from "react";
-import { getHouses, house } from "../Services/getHouses";
+import { house } from "../Services/getHouses";
 import useSearch from "./useSearch";
 
-const useSearchHouses = (houses: house[],
-  setHouses: React.Dispatch<React.SetStateAction<house[] | []>>
-) => useSearch<house>(getHouses() ,houses, setHouses);
+const useSearchHouses = (
+  setHouses: React.Dispatch<React.SetStateAction<house[] | []>>,
+  houses: house[]
+) => useSearch<house>(houses, setHouses);
 
 export default useSearchHouses;

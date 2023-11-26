@@ -45,7 +45,7 @@ const HomeViewBody = ({ house, moreDetails, setIsOpen, id }: Props) => {
               fontSize={{ base: "2xl", sm: "4xl", lg: "4xl" }}
               marginY={2}
             >
-              {house?.location}
+              {house?.location.name}
             </Heading>
             <Link to={`/${id}/pay`}>
               <ButtonRegular

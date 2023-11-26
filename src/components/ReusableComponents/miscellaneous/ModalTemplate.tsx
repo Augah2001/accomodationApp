@@ -14,12 +14,13 @@ import GradientDiv from "./GradientDiv";
 interface Props {
   headerText: string;
   Node: () => JSX.Element;
+  path: string
 }
 
-const ModalTemplate = ({ headerText, Node }: Props) => {
+const ModalTemplate = ({ headerText, Node, path }: Props) => {
   const { isOpen, handleClose } = useOutletContext<ContextText>();
   return (
-    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={handleClose}>
+    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={()=> handleClose(path)}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader

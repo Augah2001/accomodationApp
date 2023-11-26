@@ -14,13 +14,13 @@ interface Props {
   }: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormRadioButtons = ({data, id,setData, radioData,errors, handleRadioChange }: Props) => {
+const FormRadioButtons = ({data, id, radioData,errors, handleRadioChange }: Props) => {
 
 
   
 
     return (
-      <RadioGroup
+      <RadioGroup marginY={2}
         value= {data[id]}
         onChange={(value)=> handleRadioChange?.(id, value )}
       >

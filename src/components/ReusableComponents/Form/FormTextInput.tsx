@@ -11,7 +11,7 @@ interface Props {
 
 const FormTextInput = ({ id, label, value, type, onChange, errors }: Props) => {
   return (
-    <Box>
+    <Box marginBottom={2}>
       <FormControl id={id}>
         <FormLabel>{label}</FormLabel>
         <Input

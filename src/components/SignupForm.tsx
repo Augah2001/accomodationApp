@@ -2,13 +2,29 @@ import { Box, HStack, Stack, useColorModeValue } from "@chakra-ui/react";
 import FormCard from "./ReusableComponents/Form/FormTemplate";
 import { useState } from "react";
 import Joi from "joi";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
+import { ContextText } from "./Layout";
 
 const SignupForm = () => {
+  const toast = useToast({
+    position: "top",
+    title: "signup successful",
+    containerStyle: {
+      width: "800px",
+      maxWidth: "500px",
+      color: "pink.600",
+      backgroundColor: "pink.600",
+    },
+  });
   const [localContext, setlocalContext] = useState<{ [key: string]: any }>({
     landlordDiv: false,
   });
 
-  const [user, setUser] = useState<{ [key: string]: string }>({
+  const { setIsOpen, setIsLogged, user, setUser } = useOutletContext<ContextText>();
+
+  const [userData, setUserData] = useState<{ [key: string]: string }>({
     firstName: "",
     lastName: "",
     email: "",
@@ -18,7 +34,7 @@ const SignupForm = () => {
   });
 
   const handleRadioChange = (id: string, value: string) => {
-    setUser({ ...user, [id]: value });
+    setUserData({ ...userData, [id]: value });
     if (value === "landlord") {
       setlocalContext({ ...localContext, landlordDiv: true });
     } else {
@@ -39,21 +55,25 @@ const SignupForm = () => {
       .required(),
     password: Joi.string().required(),
     userType: Joi.string().required().label("user type"),
-    authKey: Joi.string(),
+    authKey: Joi.string().allow(""),
   });
 
+  const navigate = useNavigate();
+  const {pathname} = useLocation()
+
   const doSubmit = () => {
-    console.log("submitted");
+    if (userData.userType === "tenant") delete userData["authKey"];
+    axios.post("http://localhost:443/api/users", userData).then((res) => {
+      toast();
+      setIsOpen(false);
+      setIsLogged(true);
+      navigate('/me');
+      setUser(res.data);
+    });
   };
 
   return (
-    <FormCard
-      doSubmit={doSubmit}
-      schema={schema}
-      data={user}
-      setData={setUser}
-      localContext={localContext}
-    >
+    <FormCard doSubmit={doSubmit} schema={schema} data={userData} setData={setUserData}>
       {(
         renderInput,
         renderPasswordInput,
