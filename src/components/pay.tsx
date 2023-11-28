@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormTemplate from "./ReusableComponents/Form/FormTemplate";
 import Joi from "joi";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { ContextText } from "../hooks/useGetPageData";
 import { useToast } from "@chakra-ui/react";
 
@@ -10,15 +10,17 @@ const Pay = () => {
     PhoneNumber: "",
   });
 
-  const {houses, id} = useOutletContext<ContextText>()
-  
-  const house = houses.find(item=> item.houseNumber === parseInt(id))
-  const toast = useToast()
+  const navigate = useNavigate()
 
+  const { houses, id } = useOutletContext<ContextText>();
+
+  const house = houses.find((item) => item.houseNumber === parseInt(id));
+  const toast = useToast();
+  navigate(`/${id}`)
 
   const doSubmit = () => {
-        toast({title: "payment succeeded"})
-   
+    toast({ title: "payment succeeded" });
+
   };
 
   const schema: Joi.ObjectSchema<any> & { [key: string]: any } = Joi.object({

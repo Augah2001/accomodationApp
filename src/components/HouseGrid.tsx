@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 
 import { house } from "../Services/getHouses";
 import HouseCard from "./HouseCard";
@@ -38,7 +38,7 @@ const HouseGrid = ({
   };
   return (
     <Box>
-      <SimpleGrid marginTop={2} columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+      {houses?.length !==0?<SimpleGrid marginTop={2} columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {houses?.map((house, index) => (
           <HouseCard
             onDelete={handleDelete}
@@ -49,7 +49,7 @@ const HouseGrid = ({
             key={house.houseNumber}
           />
         ))}
-      </SimpleGrid>
+      </SimpleGrid>: <Text>No houses found</Text>}
     </Box>
   );
 };
