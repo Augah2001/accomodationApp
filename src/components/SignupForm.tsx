@@ -2,10 +2,12 @@ import { Box, HStack, Stack, useColorModeValue } from "@chakra-ui/react";
 import FormCard from "./ReusableComponents/Form/FormTemplate";
 import { useState } from "react";
 import Joi from "joi";
-import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
-import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
-import { ContextText } from "./Layout";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { ContextText } from "../hooks/useGetPageData";
+import apiClient from "../Services/apiClient";
+import { User } from "./Layout";
 
 const SignupForm = () => {
   const toast = useToast({
@@ -22,7 +24,7 @@ const SignupForm = () => {
     landlordDiv: false,
   });
 
-  const { setIsOpen, setIsLogged, user, setUser } = useOutletContext<ContextText>();
+  const { setIsOpen,setUser } = useOutletContext<ContextText>();
 
   const [userData, setUserData] = useState<{ [key: string]: string }>({
     firstName: "",
@@ -30,7 +32,7 @@ const SignupForm = () => {
     email: "",
     password: "",
     userType: "",
-    authKey: "",
+    authorization_key: "",
   });
 
   const handleRadioChange = (id: string, value: string) => {
@@ -55,25 +57,66 @@ const SignupForm = () => {
       .required(),
     password: Joi.string().required(),
     userType: Joi.string().required().label("user type"),
-    authKey: Joi.string().allow(""),
+    authorization_key:
+      userData.userType === "landlord"
+        ? Joi.string().required()
+        : Joi.string().allow(""),
   });
 
   const navigate = useNavigate();
-  const {pathname} = useLocation()
 
   const doSubmit = () => {
-    if (userData.userType === "tenant") delete userData["authKey"];
-    axios.post("http://localhost:443/api/users", userData).then((res) => {
-      toast();
-      setIsOpen(false);
-      setIsLogged(true);
-      navigate('/me');
-      setUser(res.data);
-    });
+    if (userData.userType === "tenant") {
+      delete userData["authorization_key"];
+      apiClient
+        .post("/users", userData)
+        .then((res) => {
+          toast();
+          
+          localStorage.setItem("token", res.headers["x-auth-token"]);
+          const user: User = jwtDecode(res.headers["x-auth-token"]);
+
+          setUser(user);
+          navigate('/')
+          setIsOpen(false);
+          // window.location.reload()
+        })
+        .catch((err) => toast({ title: err.response }));
+    } else {
+      apiClient
+        .post("/auth", { authorization_key: userData.authorization_key })
+        .then((res) => {
+          if (res.data) {
+            apiClient
+              .post("/users", userData)
+              .then((res) => {
+                toast();
+                
+                localStorage.setItem("token", res.headers["x-auth-token"]);
+                const user: User = jwtDecode(res.headers["x-auth-token"]);
+
+                setUser(user);
+                setIsOpen(false);
+
+                navigate('/')
+              })
+              .catch((err) => toast({ title: err.response.data, position: "top" }));
+          }
+        })
+        .catch((err) => {
+          toast({ title: err.response.data, position: "top" });
+          return;
+        });
+    }
   };
 
   return (
-    <FormCard doSubmit={doSubmit} schema={schema} data={userData} setData={setUserData}>
+    <FormCard
+      doSubmit={doSubmit}
+      schema={schema}
+      data={userData}
+      setData={setUserData}
+    >
       {(
         renderInput,
         renderPasswordInput,
@@ -98,10 +141,16 @@ const SignupForm = () => {
                 ],
                 handleRadioChange
               )}
-              <Box color={"green.400"}>
-                {localContext.landlordDiv &&
-                  renderInput("authKey", "Authorization key", "text")}
-              </Box>
+              {
+                <Box color={"green.400"}>
+                  {localContext.landlordDiv &&
+                    renderInput(
+                      "authorization_key",
+                      "Authorization key",
+                      "text"
+                    )}
+                </Box>
+              }
               {renderButton("Sign Up")}
               {renderText("/login", "Already have an account?", "login")}
             </Stack>

@@ -12,20 +12,20 @@ import image from "../assets/no-image-placeholder.webp";
 import { Link, useLocation } from "react-router-dom";
 
 import { DeleteIcon } from "@chakra-ui/icons";
+import { User } from "./Layout";
 
 interface Props {
   house: house;
   index: number;
-  isLogged: boolean;
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onDelete: (house: house) => void;
+  user: User
 }
 
-const HouseCard = ({ house, index, isLogged, setIsOpen, onDelete }: Props) => {
+const HouseCard = ({ house, user, index, setIsOpen, onDelete }: Props) => {
   const { pathname } = useLocation();
 
-  console.log(house.location);
+
   return (
     <>
       <Card
@@ -40,18 +40,19 @@ const HouseCard = ({ house, index, isLogged, setIsOpen, onDelete }: Props) => {
       >
         <Image src={image} />
 
-        <HStack>
+        <Box display= "flex" flexDirection= "row" >
+          <Box width= "80%" >
           <Link
             onClick={() => setIsOpen(true)}
             to={
-              (pathname === "/me/my-assets" && `/${house.houseNumber}`) ||
-              isLogged
+        
+              user
                 ? `/${house.houseNumber}`
                 : "/login"
             }
           >
             {" "}
-            <CardBody width="100%">
+            <CardBody >
               <Heading
                 marginY={3}
                 fontSize=""
@@ -80,11 +81,14 @@ const HouseCard = ({ house, index, isLogged, setIsOpen, onDelete }: Props) => {
               {}
             </CardBody>
           </Link>
-          {pathname === "/me/my-assets" && (
+
+          </Box>
+          
+          <Box  paddingTop= "80px">
+          {(pathname === "/my-assets" ) && (
             <DeleteIcon
-              marginLeft="46%"
-              marginTop="13%"
-              textAlign={"end"}
+              
+              
               boxSize={5}
               color="gray"
               _hover={{
@@ -96,7 +100,10 @@ const HouseCard = ({ house, index, isLogged, setIsOpen, onDelete }: Props) => {
               }}
             />
           )}
-        </HStack>
+            
+          </Box>
+          
+        </Box>
 
         <Box key={house.houseNumber} display="flex" flexDirection="row">
           <Box

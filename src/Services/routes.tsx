@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useLocation } from "react-router-dom";
 import Layout from "../components/Layout";
 import HomePage from "../components/HomePage";
 import HouseViewPage from "../components/HouseViewPage";
@@ -6,13 +6,11 @@ import HouseViewPage from "../components/HouseViewPage";
 import ModalTemplate from "../components/ReusableComponents/miscellaneous/ModalTemplate";
 import SignupForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
-import Navbar from "../components/Navbar";
-import useExample from "../components/useExample";
-import SlideShow from "../components/SlideShow";
 import ImageModal from "../components/ImageModal";
 import Pay from "../components/pay";
 import LandlordPage from "../components/LandlordPage";
 import AddForm from "../components/AddForm";
+import Signout from "../components/Signout";
 
 const Routes = () => {
   return createBrowserRouter([
@@ -26,34 +24,48 @@ const Routes = () => {
           children: [
             {
               path: "signup",
-              element: <ModalTemplate headerText={"JOIN"} Node={SignupForm} path="/" />,
+              element: (
+                <ModalTemplate
+                  headerText={"JOIN"}
+                  Node={SignupForm}
+                  path="/me"
+                />
+              ),
             },
             {
               path: "landlord",
               element: <LandlordPage />,
-              
             },
             {
               path: "login",
-              element: <ModalTemplate headerText={"LOGIN"} Node={LoginForm} path="/" />,
+              element: (
+                <ModalTemplate
+                  headerText={"LOGIN"}
+                  Node={LoginForm}
+                  path="/me"
+                />
+              ),
             },
           ],
         },
+        { path: "/signout", element: <Signout /> },
         {
           path: "me",
           element: <HomePage />,
+        },
+        {
+          path: "my-assets",
+          element: <LandlordPage />,
           children: [
             {
-              path: "my-assets",
-              element: <LandlordPage />,
-              children: [
-                {
-                  path: "add",
-                  element: (
-                    <ModalTemplate headerText={"Add house"} Node={AddForm} path="/me/my-assets"/>
-                  ),
-                },
-              ],
+              path: "add",
+              element: (
+                <ModalTemplate
+                  headerText={"Add house"}
+                  Node={AddForm}
+                  path="/my-assets"
+                />
+              ),
             },
           ],
         },
@@ -68,7 +80,7 @@ const Routes = () => {
             },
             {
               path: "pay",
-              element: <ModalTemplate headerText="Pay" Node={Pay} path = "/"/>,
+              element: <ModalTemplate headerText="Pay" Node={Pay} path="/" />,
             },
           ],
         },

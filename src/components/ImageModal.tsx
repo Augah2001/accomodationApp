@@ -2,11 +2,8 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   useColorModeValue,
-  ModalCloseButton,
   ModalBody,
-  Button,
 } from "@chakra-ui/react";
 
 import { useOutletContext } from "react-router-dom";
@@ -22,7 +19,7 @@ const ImageModal = () => {
   console.log("clicked");
 
   return (
-    <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={()=>handleClose}>
+    <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={()=>handleClose(`/${id}`)}>
       <ModalOverlay />
       <ModalContent width={"100%"}>
         <ModalBody

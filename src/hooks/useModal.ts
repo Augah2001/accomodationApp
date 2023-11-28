@@ -7,7 +7,7 @@ const useModal = () => {
   const {pathname} = useLocation()
 
   useEffect(()=> {
-    pathname === "/login" || pathname === "/signup" && setIsOpen(true)
+    (pathname === "/login" || pathname === "/signup" || pathname === "/my-assets/add") && setIsOpen(true)
   },[pathname])
   const [path, setPath] = useState<string | "">("");
 

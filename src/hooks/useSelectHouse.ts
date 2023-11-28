@@ -1,6 +1,6 @@
 import React from "react";
 import useSelect from "./useSelect";
-import { getHouses, house } from "../Services/getHouses";
+import {  house } from "../Services/getHouses";
 import { initialPriceRange } from "../Services/getPrices";
 
 const useSelectHouse = (

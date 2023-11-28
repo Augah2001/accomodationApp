@@ -2,26 +2,39 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 
 import { house } from "../Services/getHouses";
 import HouseCard from "./HouseCard";
+import apiClient from "../Services/apiClient";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { User } from "./Layout";
 
 interface Props {
   houses: house[] | undefined;
-  isLogged: boolean;
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
+  user: User
+ 
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setHouses: React.Dispatch<React.SetStateAction<house[] | undefined>>;
 }
 
 const HouseGrid = ({
   houses,
-  setIsLogged,
-  isLogged,
+  user,
   setIsOpen,
   setHouses,
 }: Props) => {
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const handleDelete = (house: house) => {
-    const newHouses = houses?.filter((item) => item !== house);
-    setHouses(newHouses);
-    console.log(houses);
+
+    apiClient.delete(`/houses/${house._id}`)
+      .then(res => {
+        console.log(res)
+        toast({title: "deleted"})
+        apiClient.get('/houses').then(res1 => setHouses(res1.data)).catch(err1=> toast({title: err1.response.data}))
+        navigate('/my-assets')
+      }).catch((err: AxiosError)=> toast({title: err.message}))
+  
   };
   return (
     <Box>
@@ -30,8 +43,7 @@ const HouseGrid = ({
           <HouseCard
             onDelete={handleDelete}
             setIsOpen={setIsOpen}
-            setIsLogged={setIsLogged}
-            isLogged={isLogged}
+            user = {user}
             index={index}
             house={house}
             key={house.houseNumber}

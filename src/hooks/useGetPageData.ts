@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSearchHouses from "./useSearchHouses";
 import useSelectHouse from "./useSelectHouse";
 import useHouseLocation from "./useHouseLocation";
-import axios from "axios";
 import useFetchHouses from "./useFetchHouses";
 import { house } from "../Services/getHouses";
 import { User } from "../components/Layout";
+import {jwtDecode} from 'jwt-decode'
 
 export type ContextText = {
   houses: house[];
-  setHouses: () => void;
+  setHouses: React.Dispatch<React.SetStateAction<house[] | undefined>>
   isOpen: boolean;
   handleClose: (path: string) => void;
   setPath: React.Dispatch<React.SetStateAction<String | "">>;
@@ -23,20 +23,27 @@ export type ContextText = {
 };
 
 const useGetPageData = () => {
+  const [user, setUser] = useState<User>();
+
   
-  const {data: houses, error, setData: setHouses} = useFetchHouses()
+  
+  const {data: houses, setData: setHouses} = useFetchHouses()
 
-  useEffect((
+  useEffect(()=> {
+   try {const jwt: any = localStorage.getItem('token')
+    const user: User = jwtDecode(jwt)
 
-  )=> {
+   setUser(user)
+   console.log(user)}
+   catch (ex) {}
+  }, [])
 
-    axios.get("http://localhost:443/api/houses/")
-    .then(res=> setHouses(res.data))
-  },[])
+  
+
 
   
   const { queriedData, setSearchQuery, searchQuery, handleSearchChange } =
-    useSearchHouses(setHouses, houses);
+    useSearchHouses(setHouses);
 
   const { filteredHouses, selectedLocation, setSelectedLocation } =
     useHouseLocation(houses);
@@ -48,6 +55,8 @@ const useGetPageData = () => {
   );
 
   return {
+    user,
+    setUser,
     setSearchQuery,
     filteredHouses,
     setHouses,

@@ -54,6 +54,10 @@ const HomeViewBody = ({ house, moreDetails, setIsOpen, id }: Props) => {
               />
             </Link>
           </HStack>
+
+          <Text fontWeight={300} fontSize={"2xl"}>
+            {`capacity: ${house?.price}`}
+          </Text>
           <Text
             color={useColorModeValue("gray.900", "gray.400")}
             fontWeight={300}

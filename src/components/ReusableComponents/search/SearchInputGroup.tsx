@@ -22,12 +22,13 @@ function SearchInputGroup({
   searchQuery,
 }: Props) {
   return (
-    <InputGroup >
+    <InputGroup marginX = {10}>
       <InputLeftElement
         children={<SearchIcon color="pink.600" />}
         className="search-icon"
       />
       <SearchInput
+      
         selectedPriceRange={selectedPriceRange}
         handlePriceChange={handlePriceChange}
         handleSearchChange={handleSearchChange}

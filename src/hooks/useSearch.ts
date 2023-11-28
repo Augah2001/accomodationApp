@@ -13,9 +13,14 @@ const useSearch = <T extends Record<string, string>>(
 
     setSearchQuery(query);
 
-    const data = initialData.filter((item) => {
+    const data = initialData.filter((item: any) => {
       const regex = new RegExp(query, "i");
       for (let key in item) {
+        if (item[key] instanceof Object) {
+          for (let key2 in item[key] ) {
+            if (regex.test(item[key][key2])) { return true}
+          }
+        }
         if (regex.test(item[key])) {
           return true;
         }

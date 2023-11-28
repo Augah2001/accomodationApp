@@ -1,11 +1,10 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import useRouteTemplating from "../hooks/useRouteTemplating";
 import useModal from "../hooks/useModal";
-
 
 export interface User {
   firstName: string;
@@ -17,16 +16,17 @@ export interface User {
 
 import useGetPageData from "../hooks/useGetPageData";
 
-
-
 const Layout = () => {
-  const [user, setUser] = useState<User>();
-
-  const [isLogged, setIsLogged] = useState(false);
+  
+  const {pathname} = useLocation()
+ 
+  
 
   const { currentTemplateAreas, currentTemplateColumns } = useRouteTemplating();
   const { isOpen, handleOpen, handleClose, path, setPath, setIsOpen } =
     useModal();
+
+  
 
   const {
     setSearchQuery,
@@ -38,7 +38,11 @@ const Layout = () => {
     handlePriceChange,
     handleSearchChange,
     searchQuery,
+    user,
+    setUser
   } = useGetPageData();
+
+  console.log(user)  
 
   return (
     <>
@@ -50,8 +54,7 @@ const Layout = () => {
         <GridItem paddingY={3} marginTop={2} area="nav">
           {" "}
           <Navbar
-            isLogged={isLogged}
-            setIsLogged={setIsLogged}
+            
             handleOpen={handleOpen}
             setSearchQuery={setSearchQuery}
             houses={houses}
@@ -67,8 +70,6 @@ const Layout = () => {
         </GridItem>
         <Outlet
           context={{
-            isLogged: isLogged,
-            setIsLogged: setIsLogged,
             setPath,
             houses,
             path,

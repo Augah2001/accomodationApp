@@ -14,17 +14,24 @@ const HomePage = () => {
     isOpen,
     handleClose,
     setSelectedLocation,
-    isLogged,
+    
     setIsOpen,
-    setIsLogged,
     user,
-    setUser,
+  
+    setUser
+    
   } = useOutletContext<ContextText>();
+  
 
   const { pathname } = useLocation();
-  useEffect(() => {
-    pathname === "/me" && setIsLogged(true);
-  });
+  
+
+
+
+
+  
+
+
 
   return (
     <>
@@ -41,10 +48,10 @@ const HomePage = () => {
             isOpen,
             handleClose,
             setIsOpen,
-            isLogged,
-            setIsLogged,
             setUser,
+           
             user,
+            houses
           }}
         />
 
@@ -52,13 +59,12 @@ const HomePage = () => {
           <HouseGrid
             setHouses={setHouses}
             setIsOpen={setIsOpen}
-            setIsLogged={setIsLogged}
-            isLogged={isLogged}
             houses={houses}
+            user = {user}
           />
         }
       </GridItem>
-      {pathname !== "/me/my-assets" && (
+      {pathname && (
         <Show above="md">
           <GridItem padding={3} w={"40%"} marginY={4} area={"aside"}>
             <SideLocationPanel setSelectedLocation={setSelectedLocation} />

@@ -1,10 +1,19 @@
-import React from "react";
-import { house } from "../Services/getHouses";
+import React, { useEffect, useState } from "react";
+import {  house } from "../Services/getHouses";
 import useSearch from "./useSearch";
+
+import useFetchHouses from "./useFetchHouses";
 
 const useSearchHouses = (
   setHouses: React.Dispatch<React.SetStateAction<house[] | []>>,
-  houses: house[]
-) => useSearch<house>(houses, setHouses);
+  
+) => {
+
+  const {data: houses,} = useFetchHouses()
+  const initialData = houses
+  
+  
+  
+  return useSearch<house>(initialData, setHouses)};
 
 export default useSearchHouses;

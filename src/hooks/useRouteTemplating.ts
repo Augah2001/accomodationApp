@@ -33,12 +33,17 @@ const useRouteTemplating = () => {
     },
     [paramRouteView]: `"nav nav nav" "leftSide main rightSide"`,
     [paramRoutePay]: `"nav nav nav" "leftSide main rightSide"`,
-    "/me/my-assets":  {
+    "/my-assets":  {
       base: `"nav" "main"`,
       md: `"nav nav" "aside main"`,
       lg: `"nav nav" "aside main"`,
     },
-    "/me/my-assets/add": 
+    "/my-assets/":  {
+      base: `"nav" "main"`,
+      md: `"nav nav" "aside main"`,
+      lg: `"nav nav" "aside main"`,
+    },
+    "/my-assets/add": 
     {
       base: `"nav" "main"`,
       md: `"nav nav" "aside main"`,
@@ -83,15 +88,20 @@ const useRouteTemplating = () => {
       lg: "1fr 4fr 1fr",
     },
 
-    "/me/my-assets":  {
+    "/my-assets":  {
       base: "1fr",
       md: "1fr",
-      lg: "200x 1fr",
+      lg: "240px 1fr",
     },
-    "/me/my-assets/add": {
+    "/my-assets/":  {
       base: "1fr",
       md: "1fr",
-      lg: "0px 1fr",
+      lg: "240px 1fr",
+    },
+    "/my-assets/add": {
+      base: "1fr",
+      md: "1fr",
+      lg: "240px 1fr",
     },
     
   };

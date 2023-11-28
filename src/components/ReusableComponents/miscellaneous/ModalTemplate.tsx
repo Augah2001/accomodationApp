@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { ContextText } from "../../Layout";
+
 import {
   Modal,
   ModalBody,
@@ -10,6 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import GradientDiv from "./GradientDiv";
+import { ContextText } from "../../../hooks/useGetPageData";
 
 interface Props {
   headerText: string;

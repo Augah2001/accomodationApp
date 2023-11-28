@@ -2,6 +2,7 @@ import { Box, Button, Heading, List, ListItem, filter } from "@chakra-ui/react";
 import { getLocations } from "../Services/getLocations";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useFetchLocation from "../hooks/useFetchLocation";
 interface Props {
   setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
@@ -17,21 +18,13 @@ export interface LocationType{
 
 
 const SideLocationPanel = ({ setSelectedLocation }: Props) => {
-  const [locations, setLocations] = useState<LocationType[]>([])
-
-
-  useEffect(()=> {
-
-    axios.get<LocationType[]>('http://127.0.0.1:443/api/locations/')
-    .then((res)=> {
-      console.log(res.data)
-      setLocations([{name: "Any", id: 0, distance: null},...res.data ])})
-    .catch((error)=> console.log(error))
   
-  }, [])
+
+
+  const {data: locations}= useFetchLocation()
 
   return (
-    <Box minW={"250px"}>
+    <Box minW={"210px"}>
       <Box display="flex" flexDirection="row">
         <Box
           width={"50%"}

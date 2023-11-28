@@ -9,7 +9,7 @@ interface CustomButtonProps {
 }
 
 interface Props {
-  menuItems: { label: string; value: any }[];
+  menuItems: any,
   heading: string
 }
 
@@ -31,7 +31,7 @@ const UserImage = ({ menuItems, heading}: Props) => {
       </MenuButton>
       <MenuList>
       <Heading as= "h6" fontSize= "20px" textAlign= "center" color= "pink.500">{heading}</Heading>
-      {menuItems.map((item, index) => (
+      {menuItems.map((item:  { label: string; value: string; }, index: number) => (
           <Link to={item.value} key={index}>
             <MenuItem value={item.value} key={index} >
               {item.label}

@@ -20,10 +20,9 @@ interface Props {
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   setPath: React.Dispatch<React.SetStateAction<string>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>
-  isLogged: boolean,
-  user: User
-  setUser: React.Dispatch<React.SetStateAction<User >>
+  
+  user: User | undefined
+  setUser: React.Dispatch<React.SetStateAction<User | undefined >>
 }
 
 const Navbar = ({
@@ -36,7 +35,7 @@ const Navbar = ({
   selectedPriceRange,
   setPath,
   setIsOpen,
-  isLogged,
+  
   user,
   setUser
 }: Props) => {
@@ -46,10 +45,9 @@ const Navbar = ({
   
   const { pathname } = useLocation();
 
-  useEffect(()=> {
-    user && axios.get<User>(`http://localhost:443/api/users/${user._id}`)
-  .then(res => setHeading(res.data.firstName))
-  }, [user])
+
+
+  
 
   useEffect(() => {
     setPath(pathname);
@@ -57,14 +55,16 @@ const Navbar = ({
 
   const threeDotsMenuItems = [
     { label: "home", value: "/" },
+    { label: "my assets", value: "/my-assets" },
     {label: "join", value: "/signup"},
     { label: "contact", value: "/contact" },
-    { label: "about", value: "/about" }
+    { label: "about us", value: "/about" },
+    { label: "signout", value: "/signout" },
     
   ];
 
   const imageMenuItems = [
-    {label: "My assets", value: "me/my-assets"},
+     (user?.userType === "landlord") && {label: "My assets", value: "/my-assets"},
     {label: "signout", value: "/signout"},
     {label: "gifts", value: "#"}
   ]
@@ -75,7 +75,7 @@ const Navbar = ({
     setIsOpen(true);
   };
 
-  console.log(isLogged)
+
 
  
 
@@ -93,7 +93,7 @@ const Navbar = ({
           <ThreeDotsMenu menuItems={threeDotsMenuItems} />
         </Show>
 
-        <Link to={isLogged? "/me": "/"}>
+        <Link to={user? "/me": "/"}>
           <Show above="md">
             <Box boxSize="50px">
               <Image src={logo} />
@@ -114,7 +114,7 @@ const Navbar = ({
             selectedPriceRange={selectedPriceRange}
           />
         )}
-        { (!isLogged) && (
+        { !user &&(
           
             <Show above="md">
               <Link to="/signup">
@@ -124,12 +124,12 @@ const Navbar = ({
             
           
         )}
-        {isLogged && <Box
+        {user && <Box
               boxSize="48px"
               borderRadius="50%"
               paddingTop={{ base: "8px", md: "6px", lg: "4px" }}
             >
-             <UserImage heading= {heading}  menuItems={imageMenuItems} />
+             <UserImage heading= {user.firstName}  menuItems={imageMenuItems} />
             </Box>}
       </HStack>
       <Box marginTop={4} display="flex" flexDirection="row">
