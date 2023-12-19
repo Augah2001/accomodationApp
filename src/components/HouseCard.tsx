@@ -60,7 +60,7 @@ const HouseCard = ({ house, user, index, setIsOpen, onDelete }: Props) => {
               <Heading
                 marginY={3}
                 fontSize=""
-              >{`Distance: ${house.distance}`}</Heading>
+              >{`Distance: ${parseInt(house.distance)/1000}km`}</Heading>
 
               <Heading marginY={3} fontSize="">
                 <HStack justifyContent="space-between">

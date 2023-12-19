@@ -33,10 +33,12 @@ const HomeViewCard = ({ setIsOpen, houses, id, isOpen, setPath }: Props) => {
   for (let key1 in house) {
     for (let key2 in moreDetails) {
       if (key1 === key2) {
-        moreDetails[key2] = house[key1];
+        if (key2 === 'distance') {moreDetails[key2] = `${house[key1]/1000}km`}
+        else {moreDetails[key2] = house[key1];}
       }
     }
   }
+  console.log(moreDetails)
 
   return (
     <>

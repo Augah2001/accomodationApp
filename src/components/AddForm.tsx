@@ -26,7 +26,8 @@ const AddForm = () => {
     images: [image, image, image],
     location: "",
     ownerId: user._id,
-    capacity: number
+    capacity: "",
+    occupied: "",
   });
 
   const schema = Joi.object({
@@ -40,7 +41,11 @@ const AddForm = () => {
     images: Joi.array().allow(""),
     location: Joi.string().required(),
     ownerId: Joi.string().allow(""),
-    capacity: Joi.number().required()
+    capacity: Joi.number().integer().required(),
+    occupied: Joi.number()
+      .integer()
+      .max(parseInt(houseData.capacity) || 0)
+      .required(),
   });
 
   const toast = useToast({
@@ -61,7 +66,7 @@ const AddForm = () => {
         setUser(user);
         navigate("/my-assets");
         setIsOpen(false);
-        console.log(res.data)
+        toast({ title: "added successfully" });
       })
       .catch((err) =>
         toast({
@@ -102,6 +107,8 @@ const AddForm = () => {
             {renderInput("price", "Price", "text")}
             {renderInput("distance", "Distance (m)", "number")}
             {renderInput("capacity", "Capacity", "number")}
+            {renderInput("occupied", "Occupied", "number")}
+
             {renderButton("ADD")}
           </>
         );

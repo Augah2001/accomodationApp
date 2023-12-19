@@ -20,34 +20,28 @@ interface Props {
   handlePriceChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   setPath: React.Dispatch<React.SetStateAction<string>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  
-  user: User | undefined
-  setUser: React.Dispatch<React.SetStateAction<User | undefined >>
+
+  user: User | undefined;
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
 }
 
 const Navbar = ({
   handleSearchChange,
   houses,
- 
+
   setSearchQuery,
   searchQuery,
   handlePriceChange,
   selectedPriceRange,
   setPath,
   setIsOpen,
-  
+
   user,
-  setUser
+  setUser,
 }: Props) => {
+  const [heading, setHeading] = useState<string>("");
 
-  const [heading, setHeading] = useState<string>("")
-
-  
   const { pathname } = useLocation();
-
-
-
-  
 
   useEffect(() => {
     setPath(pathname);
@@ -56,28 +50,28 @@ const Navbar = ({
   const threeDotsMenuItems = [
     { label: "home", value: "/" },
     { label: "my assets", value: "/my-assets" },
-    {label: "join", value: "/signup"},
+    { label: "join", value: "/signup" },
     { label: "contact", value: "/contact" },
     { label: "about us", value: "/about" },
     { label: "signout", value: "/signout" },
-    
   ];
 
-  const imageMenuItems = [
-     (user?.userType === "landlord") && {label: "My assets", value: "/my-assets"},
-    {label: "signout", value: "/signout"},
-    {label: "gifts", value: "#"}
-  ]
-  
+  let imageMenuItems = [
+    user &&
+      user?.userType === "landlord" && {
+        label: "My assets",
+        value: "/my-assets",
+      },
+    { label: "signout", value: "/signout" },
+    { label: "gifts", value: "#" },
+  ];
+
+  imageMenuItems = imageMenuItems.filter((item) => item === undefined);
 
   const handleClick = () => {
     setPath(pathname);
     setIsOpen(true);
   };
-
-
-
- 
 
   return (
     <>
@@ -93,7 +87,7 @@ const Navbar = ({
           <ThreeDotsMenu menuItems={threeDotsMenuItems} />
         </Show>
 
-        <Link to={user? "/me": "/"}>
+        <Link to={user ? "/me" : "/"}>
           <Show above="md">
             <Box boxSize="50px">
               <Image src={logo} />
@@ -114,23 +108,22 @@ const Navbar = ({
             selectedPriceRange={selectedPriceRange}
           />
         )}
-        { !user &&(
-          
-            <Show above="md">
-              <Link to="/signup">
-                <ButtonRegular handleClick={handleClick} label="JOIN" />
-              </Link>
-            </Show>
-            
-          
+        {!user && (
+          <Show above="md">
+            <Link to="/signup">
+              <ButtonRegular handleClick={handleClick} label="JOIN" />
+            </Link>
+          </Show>
         )}
-        {user && <Box
-              boxSize="48px"
-              borderRadius="50%"
-              paddingTop={{ base: "8px", md: "6px", lg: "4px" }}
-            >
-             <UserImage heading= {user.firstName}  menuItems={imageMenuItems} />
-            </Box>}
+        {user && (
+          <Box
+            boxSize="48px"
+            borderRadius="50%"
+            paddingTop={{ base: "8px", md: "6px", lg: "4px" }}
+          >
+            <UserImage heading={user.firstName} menuItems={imageMenuItems} />
+          </Box>
+        )}
       </HStack>
       <Box marginTop={4} display="flex" flexDirection="row">
         <Box

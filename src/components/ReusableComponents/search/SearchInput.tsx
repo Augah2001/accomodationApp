@@ -13,8 +13,7 @@ interface Props {
 const SearchInput = ({
   handleSearchChange,
   searchQuery,
-  houses,
-  setSearchQuery,
+  
 }: Props) => {
   return (
     <Input

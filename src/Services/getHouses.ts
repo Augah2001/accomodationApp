@@ -11,6 +11,8 @@ export interface house {
   backgroundImage: string;
   images: any[];
   location: {name: string, _id: string, distance: string}
+  capacity: number
+  occupied: number
   
   [key:string]: any
 }

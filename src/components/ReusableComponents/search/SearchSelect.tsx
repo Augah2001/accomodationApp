@@ -10,8 +10,7 @@ interface Props {
 const SearchSelect = ({ handlePriceChange, selectedPriceRange }: Props) => {
   return (
     <Select
-      placeholder="Price"
-      variant="unstyled"
+      placeholder="Price"      variant="unstyled"
       h={"40px"}
       borderRadius={5}
       icon={<ChevronDownIcon />}

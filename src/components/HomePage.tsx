@@ -2,9 +2,8 @@ import { GridItem, Show } from "@chakra-ui/react";
 import HouseGrid from "./HouseGrid";
 import SideLocationPanel from "./SideLocationPanel";
 import { Outlet, useLocation, useOutletContext } from "react-router-dom";
-
-import { useEffect } from "react";
 import { ContextText } from "../hooks/useGetPageData";
+import { Spinner } from "@chakra-ui/react";
 
 const HomePage = () => {
   const {
@@ -14,7 +13,7 @@ const HomePage = () => {
     isOpen,
     handleClose,
     setSelectedLocation,
-    
+    isLoading,
     setIsOpen,
     user,
   
@@ -25,13 +24,6 @@ const HomePage = () => {
 
   const { pathname } = useLocation();
   
-
-
-
-
-  
-
-
 
   return (
     <>
@@ -57,6 +49,7 @@ const HomePage = () => {
 
         {
           <HouseGrid
+            isLoading = {isLoading}
             setHouses={setHouses}
             setIsOpen={setIsOpen}
             houses={houses}

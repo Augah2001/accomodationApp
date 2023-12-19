@@ -90,17 +90,17 @@ const useRouteTemplating = () => {
 
     "/my-assets":  {
       base: "1fr",
-      md: "1fr",
+      md: " 240px 1fr",
       lg: "240px 1fr",
     },
     "/my-assets/":  {
       base: "1fr",
-      md: "1fr",
+      md: "240px 1fr",
       lg: "240px 1fr",
     },
     "/my-assets/add": {
       base: "1fr",
-      md: "1fr",
+      md: "240px 1fr",
       lg: "240px 1fr",
     },
     

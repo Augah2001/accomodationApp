@@ -56,8 +56,11 @@ const HomeViewBody = ({ house, moreDetails, setIsOpen, id }: Props) => {
           </HStack>
 
           <Text fontWeight={300} fontSize={"2xl"}>
-            {`capacity: ${house?.price}`}
+            {`capacity: ${house?.capacity }`}
           </Text>
+          {house && <Text fontWeight={300} fontSize={"2xl"}>
+            {`available: ${house?.capacity - house?.occupied }`}
+          </Text>}
           <Text
             color={useColorModeValue("gray.900", "gray.400")}
             fontWeight={300}

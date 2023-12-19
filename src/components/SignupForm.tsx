@@ -81,7 +81,7 @@ const SignupForm = () => {
           setIsOpen(false);
           // window.location.reload()
         })
-        .catch((err) => toast({ title: err.response }));
+        .catch((err) => toast({ title: err.message }));
     } else {
       apiClient
         .post("/auth", { authorization_key: userData.authorization_key })

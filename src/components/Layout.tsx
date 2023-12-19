@@ -39,7 +39,8 @@ const Layout = () => {
     handleSearchChange,
     searchQuery,
     user,
-    setUser
+    setUser,
+    isLoading
   } = useGetPageData();
 
   console.log(user)  
@@ -81,6 +82,7 @@ const Layout = () => {
             setSelectedLocation,
             setUser,
             user,
+            isLoading
           }}
         />
       </Grid>

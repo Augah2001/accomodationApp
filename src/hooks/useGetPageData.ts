@@ -20,6 +20,8 @@ export type ContextText = {
   setSelectedLocation: React.Dispatch<React.SetStateAction<string | undefined>>;
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  isLoading: boolean
+
 };
 
 const useGetPageData = () => {
@@ -27,7 +29,8 @@ const useGetPageData = () => {
 
   
   
-  const {data: houses, setData: setHouses} = useFetchHouses()
+  const {data: houses, setData: setHouses, isLoading} = useFetchHouses()
+  
 
   useEffect(()=> {
    try {const jwt: any = localStorage.getItem('token')
@@ -66,6 +69,7 @@ const useGetPageData = () => {
     searchQuery,
     selectedLocation,
     setSelectedLocation,
+    isLoading
   };
 };
 

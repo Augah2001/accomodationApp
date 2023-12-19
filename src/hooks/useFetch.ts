@@ -7,22 +7,30 @@ const useFetch = <T>(endpoint: string) => {
 
     const [data, setData] = useState<T[]>([] as T[])
     const [error, setError] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
 
 
 
 
+
+    
 
     useEffect((
 
+      
         )=> {
+          setIsLoading(true)
       
           apiClient.get(endpoint)
           .then(res=> setData(res.data))
           .catch((err) => setError(err.message))
+          setIsLoading(false)
         },[])
+
+        
       
-  return {data, error, setData}
+  return {data, error, setData, isLoading}
     
   
 }
